@@ -31,6 +31,4 @@ The METAR reports for all stations (worldwide) for any "cycle" (i.e., hour)  in 
 
 
 # METAR specifications
-The Federal Meteorological Handbook No.1. (FMH-1 1995), which describes the U.S. standards, is available online at
-
-   http://www.ofcm.gov/fmh-1/fmh1.htm
+The Federal Meteorological Handbook No.1. (FMH-1 1995), which describes the U.S. standards, is available online at http://www.ofcm.gov/fmh-1/fmh1.htm
