@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+/jars
+/output/RMETAR.Rcheck
+/pkg/man
+*\.dll
+*\.so
+*\.[oa]
