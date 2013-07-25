@@ -4,7 +4,7 @@ RMETAR
 A METAR decoder for R users, connecting to mdsplib (METAR Decoder Software Package Library - http://mdsplib.sourceforge.net/) 
 
 # Installation
-To start up building recommendation engines, install the R packages Myrrixjars and Myrrix as follows.
+To install the package, do as follows.
 
     library(devtools)
     install_github("RMETAR", "jwijffels", subdir="/pkg")   
