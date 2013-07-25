@@ -367,45 +367,68 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   for (int i = 0; i < 23; i++) if(dcdmetar_numerics[i] == (float) MAXINT ) dcdmetar_numerics[i] = NA_REAL;
   //if(dcdmetar_numerics[23] == (double) MAXINT ) dcdmetar_numerics[23] = NA_REAL;
 
+  // Extra, special elements in the metar struct
+  SEXP result_Runway_VisRange_0 = PROTECT(extract_runway_VisRange(Mptr, 0));
+  SEXP result_Runway_VisRange_1 = PROTECT(extract_runway_VisRange(Mptr, 1));
+  SEXP result_Runway_VisRange_2 = PROTECT(extract_runway_VisRange(Mptr, 2));
+  SEXP result_Runway_VisRange_3 = PROTECT(extract_runway_VisRange(Mptr, 3));
+  SEXP result_Runway_VisRange_4 = PROTECT(extract_runway_VisRange(Mptr, 4));
+  SEXP result_Runway_VisRange_5 = PROTECT(extract_runway_VisRange(Mptr, 5));
+  SEXP result_Runway_VisRange_6 = PROTECT(extract_runway_VisRange(Mptr, 6));
+  SEXP result_Runway_VisRange_7 = PROTECT(extract_runway_VisRange(Mptr, 7));
+  SEXP result_Runway_VisRange_8 = PROTECT(extract_runway_VisRange(Mptr, 8));
+  SEXP result_Runway_VisRange_9 = PROTECT(extract_runway_VisRange(Mptr, 9));
+  SEXP result_Runway_VisRange_10 = PROTECT(extract_runway_VisRange(Mptr, 10));
+  SEXP result_Runway_VisRange_11 = PROTECT(extract_runway_VisRange(Mptr, 11));  
+  SEXP result_dispatch_VisRange = PROTECT(extract_dispatch_VisRange(Mptr));  
+  SEXP result_Recent_Wx_0 = PROTECT(extract_recent_wx(Mptr, 0));
+  SEXP result_Recent_Wx_1 = PROTECT(extract_recent_wx(Mptr, 1));
+  SEXP result_Recent_Wx_2 = PROTECT(extract_recent_wx(Mptr, 2));
+  SEXP result_windstruct = PROTECT(extract_windstruct(Mptr));  
+  SEXP result_Cloud_Conditions_0 = PROTECT(extract_cloud_Conditions(Mptr, 0));
+  SEXP result_Cloud_Conditions_1 = PROTECT(extract_cloud_Conditions(Mptr, 1));
+  SEXP result_Cloud_Conditions_2 = PROTECT(extract_cloud_Conditions(Mptr, 2));
+  SEXP result_Cloud_Conditions_3 = PROTECT(extract_cloud_Conditions(Mptr, 3));
+  SEXP result_Cloud_Conditions_4 = PROTECT(extract_cloud_Conditions(Mptr, 4));
+  SEXP result_Cloud_Conditions_5 = PROTECT(extract_cloud_Conditions(Mptr, 5));
+  
   // Pushing it to the output list
   SET_ELEMENT(result_characters, 0, result_characters_single);
   SET_ELEMENT(result_characters, 1, result_characters_WxObstruct);
   SET_ELEMENT(result_characters, 2, result_characters_PartialObscurationAmt);
   SET_ELEMENT(result_characters, 3, result_characters_PartialObscurationPhenom);
-  SET_ELEMENT(result_characters, 4, result_characters_SfcObscuration);
-  
+  SET_ELEMENT(result_characters, 4, result_characters_SfcObscuration);  
   SET_ELEMENT(result, 0, result_characters);
   SET_ELEMENT(result, 1, result_mdsp_bool);  
   SET_ELEMENT(result, 2, result_integers);  
   SET_ELEMENT(result, 3, result_numerics);  
-
-  SET_ELEMENT(result_Runway_VisRange, 0, extract_runway_VisRange(Mptr, 0));
-  SET_ELEMENT(result_Runway_VisRange, 1, extract_runway_VisRange(Mptr, 1));
-  SET_ELEMENT(result_Runway_VisRange, 2, extract_runway_VisRange(Mptr, 2));
-  SET_ELEMENT(result_Runway_VisRange, 3, extract_runway_VisRange(Mptr, 3));
-  SET_ELEMENT(result_Runway_VisRange, 4, extract_runway_VisRange(Mptr, 4));
-  SET_ELEMENT(result_Runway_VisRange, 5, extract_runway_VisRange(Mptr, 5));
-  SET_ELEMENT(result_Runway_VisRange, 6, extract_runway_VisRange(Mptr, 6));
-  SET_ELEMENT(result_Runway_VisRange, 7, extract_runway_VisRange(Mptr, 7));
-  SET_ELEMENT(result_Runway_VisRange, 8, extract_runway_VisRange(Mptr, 8));
-  SET_ELEMENT(result_Runway_VisRange, 9, extract_runway_VisRange(Mptr, 9));
-  SET_ELEMENT(result_Runway_VisRange, 10, extract_runway_VisRange(Mptr, 10));
-  SET_ELEMENT(result_Runway_VisRange, 11, extract_runway_VisRange(Mptr, 11));
+  SET_ELEMENT(result_Runway_VisRange, 0, result_Runway_VisRange_0);
+  SET_ELEMENT(result_Runway_VisRange, 1, result_Runway_VisRange_1);
+  SET_ELEMENT(result_Runway_VisRange, 2, result_Runway_VisRange_2);
+  SET_ELEMENT(result_Runway_VisRange, 3, result_Runway_VisRange_3);
+  SET_ELEMENT(result_Runway_VisRange, 4, result_Runway_VisRange_4);
+  SET_ELEMENT(result_Runway_VisRange, 5, result_Runway_VisRange_5);
+  SET_ELEMENT(result_Runway_VisRange, 6, result_Runway_VisRange_6);
+  SET_ELEMENT(result_Runway_VisRange, 7, result_Runway_VisRange_7);
+  SET_ELEMENT(result_Runway_VisRange, 8, result_Runway_VisRange_8);
+  SET_ELEMENT(result_Runway_VisRange, 9, result_Runway_VisRange_9);
+  SET_ELEMENT(result_Runway_VisRange, 10, result_Runway_VisRange_10);
+  SET_ELEMENT(result_Runway_VisRange, 11, result_Runway_VisRange_11);
   SET_ELEMENT(result, 4, result_Runway_VisRange);
-  SET_ELEMENT(result, 5, extract_dispatch_VisRange(Mptr));
-  SET_ELEMENT(result_Recent_Wx, 0, extract_recent_wx(Mptr, 0));
-  SET_ELEMENT(result_Recent_Wx, 1, extract_recent_wx(Mptr, 1));
-  SET_ELEMENT(result_Recent_Wx, 2, extract_recent_wx(Mptr, 2));  
+  SET_ELEMENT(result, 5, result_dispatch_VisRange);
+  SET_ELEMENT(result_Recent_Wx, 0, result_Recent_Wx_0);
+  SET_ELEMENT(result_Recent_Wx, 1, result_Recent_Wx_1);
+  SET_ELEMENT(result_Recent_Wx, 2, result_Recent_Wx_2);  
   SET_ELEMENT(result, 6, result_Recent_Wx);
-  SET_ELEMENT(result, 7, extract_windstruct(Mptr));
-  SET_ELEMENT(result_Cloud_Conditions, 0, extract_cloud_Conditions(Mptr, 0));
-  SET_ELEMENT(result_Cloud_Conditions, 1, extract_cloud_Conditions(Mptr, 1));
-  SET_ELEMENT(result_Cloud_Conditions, 2, extract_cloud_Conditions(Mptr, 2));
-  SET_ELEMENT(result_Cloud_Conditions, 3, extract_cloud_Conditions(Mptr, 3));
-  SET_ELEMENT(result_Cloud_Conditions, 4, extract_cloud_Conditions(Mptr, 4));
-  SET_ELEMENT(result_Cloud_Conditions, 5, extract_cloud_Conditions(Mptr, 5));
+  SET_ELEMENT(result, 7, result_windstruct);    
+  SET_ELEMENT(result_Cloud_Conditions, 0, result_Cloud_Conditions_0);
+  SET_ELEMENT(result_Cloud_Conditions, 1, result_Cloud_Conditions_1);
+  SET_ELEMENT(result_Cloud_Conditions, 2, result_Cloud_Conditions_2);
+  SET_ELEMENT(result_Cloud_Conditions, 3, result_Cloud_Conditions_3);
+  SET_ELEMENT(result_Cloud_Conditions, 4, result_Cloud_Conditions_4);
+  SET_ELEMENT(result_Cloud_Conditions, 5, result_Cloud_Conditions_5);
   SET_ELEMENT(result, 8, result_Cloud_Conditions);
-  
-  UNPROTECT(15);
+
+  UNPROTECT(38);
   return(result);
 }

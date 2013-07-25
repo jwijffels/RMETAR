@@ -27,17 +27,17 @@ decodemetar <- function(x, printdecodedmetar=FALSE){
     x
   }
   names(result$characters) <- tolower(c("single","WxObstruct",
-                                "PartialObscurationAmt","PartialObscurationPhenom","SfcObscuration"))
+                                        "PartialObscurationAmt","PartialObscurationPhenom","SfcObscuration"))
   names(result$characters$single) <- tolower(c("synoptic_cloud_type", "snow_depth_group", "codeName", "stnid", "horiz_vsby", "dir_min_horiz_vsby", 
                                                "vsby_Dir", "autoIndicator", "VSBY_2ndSite_LOC", "SKY_2ndSite_LOC", "SKY_2ndSite", "ObscurAloft", 
                                                "ObscurAloftSkyCond", "VrbSkyBelow", "VrbSkyAbove", "LTG_DIR", "CloudLowMediumHigh", "CIG_2ndSite_LOC", 
                                                "VIRGA_DIR", "TornadicType", "TornadicLOC", "TornadicDIR", "TornadicMovDir", "CHINO_LOC", "VISNO_LOC", 
                                                "charPrevailVsby", "charVertVsby", "TS_LOC", "TS_MOVMNT"))
   names(result$mdspbool) <- tolower(c("Indeterminant3_6HrPrecip", "Indeterminant_24HrPrecip", "CIGNO", "SLPNO", "ACFTMSHP", "NOSPECI", "FIRST", "LAST", 
-                                       "SunSensorOut", "AUTO", "COR", "NIL_rpt", "CAVOK", "RVRNO", "A_altstng", "Q_altstng", "VIRGA", "VOLCASH", 
-                                       "GR", "CHINO", "VISNO", "PNO", "PWINO", "FZRANO", "TSNO", "DollarSign", "PRESRR", "PRESFR", "Wshft_FROPA", 
-                                       "OCNL_LTG", "FRQ_LTG", "CNS_LTG", "CG_LTG", "IC_LTG", "CC_LTG", "CA_LTG", "DSNT_LTG", "AP_LTG", "VcyStn_LTG", 
-                                       "OVHD_LTG", "LightningVCTS", "LightningTS"))
+                                      "SunSensorOut", "AUTO", "COR", "NIL_rpt", "CAVOK", "RVRNO", "A_altstng", "Q_altstng", "VIRGA", "VOLCASH", 
+                                      "GR", "CHINO", "VISNO", "PNO", "PWINO", "FZRANO", "TSNO", "DollarSign", "PRESRR", "PRESFR", "Wshft_FROPA", 
+                                      "OCNL_LTG", "FRQ_LTG", "CNS_LTG", "CG_LTG", "IC_LTG", "CC_LTG", "CA_LTG", "DSNT_LTG", "AP_LTG", "VcyStn_LTG", 
+                                      "OVHD_LTG", "LightningVCTS", "LightningTS"))
   names(result$integers) <- tolower(c("TornadicDistance", "ob_hour", "ob_minute", "ob_date", "minWnDir", "maxWnDir", "VertVsby", "temp", 
                                       "dew_pt_temp", "QFE", "hectoPasc_altstng", "char_prestndcy", "minCeiling", 
                                       "maxCeiling", "WshfTime_hour", "WshfTime_minute", "min_vrbl_wind_dir", "max_vrbl_wind_dir", 

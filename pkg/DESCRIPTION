@@ -1,12 +1,13 @@
 Package: RMETAR
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 License: GPL-3
-Title: Functions to extract weather information from METAR reports (Aviation
-    Routine Weather Reports). Using the METAR Decoder Software Package Library
-    (mdsplib) which is provided by the National Weather Service.
+Title: Functionality to extract weather information from METAR reports.
 Type: Package
 Author: Jan Wijffels
-Description: TODO
+Description: Functions to extract weather information from METAR reports
+    (Aviation Routine Weather Reports). Using the METAR Decoder Software
+    Package Library (mdsplib) which is provided by the National Weather
+    Service.
 Version: 1.0
 URL: http://www.bnosac.be
 Date: 2013-07-25
