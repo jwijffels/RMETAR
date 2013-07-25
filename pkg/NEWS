@@ -1,0 +1,4 @@
+METAR
+-------------
+
+* Version 1.0. Initial version of the package, with 1 function decodemetar
