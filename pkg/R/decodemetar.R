@@ -54,6 +54,7 @@ decodemetar <- function(x, printdecodedmetar=FALSE){
   result$cloud.conditions <- lapply(result$cloud.conditions, FUN=make_underscore_names)
   result$dispatch.visualrange <- make_underscore_names(result$dispatch.visualrange)
   result$wind <- make_underscore_names(result$wind)
+  result$metar <- x
   class(result) <- c("decodedMETAR", "list")
   result
 }
