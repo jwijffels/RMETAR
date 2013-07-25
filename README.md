@@ -21,13 +21,13 @@ The following example shows the basic usage on how to extract weather informatio
  
 
 # Current METAR reports
-Current and historical METAR data can be obtained from various places. The current METAR report for a given airport is available at the following URL where '<station>' is the four-letter ICAO airport station code.
+Current and historical METAR data can be obtained from various places. The current METAR report for a given airport is available at the following URL where '$station$' is the four-letter ICAO airport station code.
 
-    http://weather.noaa.gov/pub/data/observations/metar/stations/<station>.TXT
+    http://weather.noaa.gov/pub/data/observations/metar/stations/$station$.TXT
 
-The METAR reports for all stations (worldwide) for any "cycle" (i.e., hour)  in the last 24 hours are available in a single file at the following URL where '<cycle>' is a 2-digit cycle number (e.g., "00", "05" or "23").  
+The METAR reports for all stations (worldwide) for any "cycle" (i.e., hour)  in the last 24 hours are available in a single file at the following URL where '$cycle$' is a 2-digit cycle number (e.g., "00", "05" or "23").  
 
-    http://weather.noaa.gov/pub/data/observations/metar/cycles/<cycle>Z.TXT
+    http://weather.noaa.gov/pub/data/observations/metar/cycles/$cycle$Z.TXT
 
 
 # METAR specifications
