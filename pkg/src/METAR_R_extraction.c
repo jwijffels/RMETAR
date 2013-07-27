@@ -402,6 +402,7 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   SET_ELEMENT(result, 1, result_mdsp_bool);  
   SET_ELEMENT(result, 2, result_integers);  
   SET_ELEMENT(result, 3, result_numerics);  
+
   SET_ELEMENT(result_Runway_VisRange, 0, result_Runway_VisRange_0);
   SET_ELEMENT(result_Runway_VisRange, 1, result_Runway_VisRange_1);
   SET_ELEMENT(result_Runway_VisRange, 2, result_Runway_VisRange_2);
