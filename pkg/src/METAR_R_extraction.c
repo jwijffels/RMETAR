@@ -4,6 +4,7 @@
 #include <R_ext/Arith.h>
 #include "metar_structs.h" 
 
+
 SEXP extract_runway_VisRange(Decoded_METAR *Mptr, int element){
   // Declare
   SEXP result = PROTECT(NEW_LIST(7));
@@ -178,8 +179,9 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   PROTECT(printdecodedmetar = AS_INTEGER(printdecodedmetar));
   
   int i;
+  char printout[5000];
   // Create the output list
-  SEXP result = PROTECT(NEW_LIST(9));
+  SEXP result = PROTECT(NEW_LIST(10));
   SEXP result_characters = PROTECT(NEW_LIST(5));
   SEXP result_characters_single = PROTECT(NEW_CHARACTER(30));
   SEXP result_characters_WxObstruct = PROTECT(NEW_CHARACTER(10));
@@ -192,6 +194,7 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   SEXP result_Runway_VisRange = PROTECT(NEW_LIST(12));
   SEXP result_Recent_Wx = PROTECT(NEW_LIST(3));
   SEXP result_Cloud_Conditions = PROTECT(NEW_LIST(6));
+  SEXP result_printout = PROTECT(NEW_CHARACTER(1));
 
   // Copy the input code 
   char inputstring[strlen(CHAR(STRING_ELT(metarcode, 0)))];  
@@ -210,7 +213,8 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   Decoded_METAR *Mptr = &Metar;
   int ErReturn;
   ErReturn = DcdMETAR(inputstring, Mptr);
-  if(INTEGER_VALUE(printdecodedmetar) == 1) prtDMETR(Mptr);
+  sprint_metar(printout, Mptr);
+  SET_STRING_ELT(result_printout, 0, mkChar(printout));
   
   // char part of the decoded_METAR struct
   if(Mptr->synoptic_cloud_type[0] != '\0') SET_STRING_ELT(result_characters_single, 0, mkChar(Mptr->synoptic_cloud_type)); else SET_STRING_ELT(result_characters_single, 0, NA_STRING);
@@ -429,7 +433,8 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   SET_ELEMENT(result_Cloud_Conditions, 4, result_Cloud_Conditions_4);
   SET_ELEMENT(result_Cloud_Conditions, 5, result_Cloud_Conditions_5);
   SET_ELEMENT(result, 8, result_Cloud_Conditions);
+  SET_ELEMENT(result, 9, result_printout);
 
-  UNPROTECT(38);
+  UNPROTECT(39);
   return(result);
 }

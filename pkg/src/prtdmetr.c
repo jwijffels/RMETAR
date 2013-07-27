@@ -900,13 +900,12 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
    strcat(string, "\n\n\n");
 }
 
-
 void prtDMETR (Decoded_METAR *Mptr)
 {
 	char string[5000];
 	
 	sprint_metar(string, Mptr);
-	printf(string);
+	//printf(string);
 }
 
 

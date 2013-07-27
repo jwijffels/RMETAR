@@ -21,7 +21,8 @@ decodemetar <- function(x, printdecodedmetar=FALSE){
   printdecodedmetar <- as.logical(printdecodedmetar)
   result <- .Call("decodeMETAR", x, printdecodedmetar, PACKAGE="RMETAR")
   names(result) <- c("characters","mdspbool","integers","numerics",
-                     "runway.visualrange","dispatch.visualrange","recent.weather","wind","cloud.conditions")
+                     "runway.visualrange","dispatch.visualrange","recent.weather","wind","cloud.conditions",
+                     "printout.mdsplib")
   make_underscore_names <- function(x){
     names(x) <- make.names(tolower(names(x)), allow_=FALSE)
     x
@@ -55,6 +56,9 @@ decodemetar <- function(x, printdecodedmetar=FALSE){
   result$dispatch.visualrange <- make_underscore_names(result$dispatch.visualrange)
   result$wind <- make_underscore_names(result$wind)
   result$metar <- x
+  if(printdecodedmetar){
+    cat(result$printout.mdsplib)
+  }
   class(result) <- c("decodedMETAR", "list")
   result
 }
