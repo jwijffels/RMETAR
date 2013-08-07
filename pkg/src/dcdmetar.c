@@ -772,9 +772,11 @@ static void parseCldData( char *token, Decoded_METAR *Mptr, int next)
       return;
  
    if( strlen(token) > 6 )
+      strncpy(Mptr->cldTypHgt[next].other_cld_phenom,token+6, min(4, (strlen(token)-6)));
+   /*
       strncpy(Mptr->cldTypHgt[next].other_cld_phenom,token+6,
               (strlen(token)-6));
- 
+ */
    strncpy(Mptr->cldTypHgt[next].cloud_type,token,3);
  
    strncpy(Mptr->cldTypHgt[next].cloud_hgt_char,token+3,3);
