@@ -4,6 +4,8 @@
 #include <R_ext/Arith.h>
 #include "metar_structs.h" 
 
+int DcdMETAR( char *, Decoded_METAR * );
+void sprint_metar( char *string, Decoded_METAR *Mptr );
 
 SEXP extract_runway_VisRange(Decoded_METAR *Mptr, int element){
   // Declare
