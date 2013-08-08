@@ -1,0 +1,3 @@
+C code in the src folder except METAR_R_extraction.c is taken and adapted from http://sourceforge.net/projects/mdsplib/ for which Copyright belongs to Eric McCarthy. This code has LGPL-2.1 license.
+
+All other C and R code and modifications to the code of Eric McCarthy also has LGPL-2.1 license.
