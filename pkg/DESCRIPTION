@@ -19,6 +19,7 @@ Date: 2013-07-25
 Suggests:
     ff,
     ffbase,
-    testthat
+    testthat (>= 2.1.0)
 Collate:
     'decodemetar.R'
+RoxygenNote: 6.1.1
