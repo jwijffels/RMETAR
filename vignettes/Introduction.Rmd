@@ -1,0 +1,45 @@
+---
+title: "Decode METAR reports"
+output: rmarkdown::html_vignette
+author: Jan Wijffels
+vignette: >
+  %\VignetteIndexEntry{Decode METAR reports}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RMETAR)
+```
+
+
+
+## Abstract
+
+METAR decoder for R users, connecting to mdsplib (METAR Decoder Software Package Library)
+
+METAR is a format for reporting weather information. A METAR weather report is predominantly used by pilots in fulfillment of a part of a pre-flight weather briefing, and by meteorologists, who use aggregated METAR information to assist in weather forecasting.
+
+Raw METAR is the most popular format in the world for the transmission of weather data.
+
+This R package connects to mdsplib - the official METAR Decoder Software Package Library available at http://mdsplib.sourceforge.net/ to extract all weather information from METAR reports.
+
+
+
+## Example
+
+```{r}
+metarcode <- "KSUU 240858Z AUTO 24018KT 10SM CLR 18/12 A2988 RMK AO2 SLPNO T01750124 58003 RVRNO"
+z <- decodemetar(metarcode, print = TRUE)
+```
+
+## GitHub - package repository
+
+The development of this package is done by BNOSAC and is available on github at https://github.com/jwijffels/RMETAR
