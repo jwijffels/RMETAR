@@ -7,3 +7,4 @@
 *\.dll
 *\.so
 *\.[oa]
+inst/doc
