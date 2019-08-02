@@ -17,16 +17,16 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#pragma comment(compiler)
-#pragma comment(date)
-#pragma comment(timestamp)
+//#pragma comment(compiler)
+//#pragma comment(date)
+//#pragma comment(timestamp)
  
 #include <stdlib.h>
  
-#pragma title("antoi - char array to integer")
-#pragma pagesize (80)
+//#pragma title("antoi - char array to integer")
+//#pragma pagesize (80)
  
-#pragma page(1)
+//#pragma page(1)
 /********************************************************************/
 /*                                                                  */
 /*  Title:         antoi                                            */
@@ -78,6 +78,10 @@ int antoi(char * string, int len)
  
 } /* end antoi */
  
+<<<<<<< update-mdsplib
 #pragma page(1)
 
 // vim: set ts=4 sw=4 sts=4 noet :
+=======
+//#pragma page(1)
+>>>>>>> Use script to comment all pragma statements that throw compiler warnings #3

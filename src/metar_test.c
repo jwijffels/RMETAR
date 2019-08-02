@@ -26,6 +26,7 @@ char *BldSynop( Decoded_METAR * , char * );
 /*char *Sec3MeSm(Decoded_METAR *, char *);*/
 /*char *Sec5MeSm(Decoded_METAR *, char *);*/
 #endif
+<<<<<<< update-mdsplib:src/metar_test.c
 
 void print_decoded_metar( Decoded_METAR *);
 int decode_metar( char *, Decoded_METAR * );
@@ -33,6 +34,15 @@ int decode_metar( char *, Decoded_METAR * );
 #pragma page(1)
 #pragma subtitle(" ")
 #pragma subtitle("subtitle - description                       ")
+=======
+ 
+void prtDMETR( Decoded_METAR *);
+int DcdMETAR( char *, Decoded_METAR * );
+ 
+//#pragma page(1)
+//#pragma subtitle(" ")
+//#pragma subtitle("subtitle - description                       ")
+>>>>>>> Use script to comment all pragma statements that throw compiler warnings #3:src/drvmetar.c
 /********************************************************************/
 /*                                                                  */
 /*  Title:         dRVMETAR                                         */
@@ -59,8 +69,13 @@ int decode_metar( char *, Decoded_METAR * );
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
+<<<<<<< update-mdsplib:src/metar_test.c
 #pragma page(1)
 main()
+=======
+//#pragma page(1)
+int main()
+>>>>>>> Use script to comment all pragma statements that throw compiler warnings #3:src/drvmetar.c
 {
  static char *string[] =
  {
