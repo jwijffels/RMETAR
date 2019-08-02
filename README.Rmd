@@ -1,0 +1,75 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# RMETAR
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of RMETAR is to provide a METAR decoder for R users, connecting to mdsplib (METAR Decoder Software Package Library - http://mdsplib.sourceforge.net/) 
+
+
+## Installation
+
+You can install the released version of RMETAR from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("RMETAR")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("jwijffels/RMETAR")
+```
+
+
+## Obtaining METAR reports
+
+Current and historical METAR data can be obtained from various places. The current METAR report for a given airport is available at the following URL where '{station}' is the four-letter ICAO airport station code.
+
+
+    https://aviationweather.gov/metar/data?ids={station}
+
+For example, you can find the METAR for London Heathrow (ICAO EGLL) at https://aviationweather.gov/metar/data?ids=egll
+    
+
+You can also query the NOAA data service at https://aviationweather.gov/dataserver/example?datatype=metar, where you can access METARS using search strings to retrieve data in XML format
+
+
+## METAR specifications
+
+The Federal Meteorological Handbook No.1. (FMH-1 1995), which describes the U.S. standards, is available online at http://www.ofcm.gov/fmh-1/fmh1.htm
+
+## Example
+
+
+```{r}
+library(RMETAR)
+```
+
+```{r}
+metarcode <- "KSUU 240858Z AUTO 24018KT 10SM CLR 18/12 A2988 RMK AO2 SLPNO T01750124 58003 RVRNO"
+result <- decodemetar(x = metarcode, printdecodedmetar=TRUE)
+```
+
+The decoded data is in a nested list:
+
+```{r}
+str(result, max.level = 2)
+```
+
+
