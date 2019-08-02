@@ -17,16 +17,16 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#pragma comment (compiler)
-#pragma comment (date)
-#pragma comment (timestamp)
-#pragma pagesize(80)
+//#pragma comment (compiler)
+//#pragma comment (date)
+//#pragma comment (timestamp)
+//#pragma pagesize(80)
  
 #include "local.h"     /* standard header file */
  
-#pragma page(1)
-#pragma subtitle(" ")
-#pragma subtitle("stspack2 - Local string test functions       ")
+//#pragma page(1)
+//#pragma subtitle(" ")
+//#pragma subtitle("stspack2 - Local string test functions       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         stspack2                                         */
@@ -94,7 +94,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-#pragma page(1)
+//#pragma page(1)
  
 int nisalnum(char *s, int n) {
  
@@ -227,4 +227,4 @@ int nisxdigi(char *s, int n) {
  
 } /* end nisxdigi */
  
-#pragma page(1)
+//#pragma page(1)
