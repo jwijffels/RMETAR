@@ -162,10 +162,10 @@ SEXP extract_cloud_Conditions(Decoded_METAR *Mptr, int element){
   SET_NAMES(result, listnames);
   
   // Assign values
-  if(Mptr->cldTypHgt[element].cloud_type[0] != '\0') SET_STRING_ELT(cloud_type, 0, mkChar(Mptr->cldTypHgt[element].cloud_type)); else SET_STRING_ELT(cloud_type, 0, NA_STRING);
-  if(Mptr->cldTypHgt[element].cloud_hgt_char[0] != '\0') SET_STRING_ELT(cloud_hgt_char, 0, mkChar(Mptr->cldTypHgt[element].cloud_hgt_char)); else SET_STRING_ELT(cloud_hgt_char, 0, NA_STRING);
-  if(Mptr->cldTypHgt[element].other_cld_phenom[0] != '\0') SET_STRING_ELT(other_cld_phenom, 0, mkChar(Mptr->cldTypHgt[element].other_cld_phenom)); else SET_STRING_ELT(other_cld_phenom, 0, NA_STRING);
-  if(Mptr->cldTypHgt[element].cloud_hgt_meters != MAXINT) cloud_hgt_meters = ScalarInteger( Mptr->cldTypHgt[element].cloud_hgt_meters); else cloud_hgt_meters = ScalarInteger(NA_INTEGER);
+  if(Mptr->cloudGroup[element].cloud_type[0] != '\0') SET_STRING_ELT(cloud_type, 0, mkChar(Mptr->cloudGroup[element].cloud_type)); else SET_STRING_ELT(cloud_type, 0, NA_STRING);
+  if(Mptr->cloudGroup[element].cloud_hgt_char[0] != '\0') SET_STRING_ELT(cloud_hgt_char, 0, mkChar(Mptr->cloudGroup[element].cloud_hgt_char)); else SET_STRING_ELT(cloud_hgt_char, 0, NA_STRING);
+  if(Mptr->cloudGroup[element].other_cld_phenom[0] != '\0') SET_STRING_ELT(other_cld_phenom, 0, mkChar(Mptr->cloudGroup[element].other_cld_phenom)); else SET_STRING_ELT(other_cld_phenom, 0, NA_STRING);
+  if(Mptr->cloudGroup[element].cloud_hgt_meters != MAXINT) cloud_hgt_meters = ScalarInteger( Mptr->cloudGroup[element].cloud_hgt_meters); else cloud_hgt_meters = ScalarInteger(NA_INTEGER);
 
   // Add them to the list
   SET_ELEMENT(result, 0, cloud_type);
@@ -249,8 +249,8 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   if(Mptr->TornadicMovDir[0] != '\0') SET_STRING_ELT(result_characters_single, 23, mkChar(Mptr->TornadicMovDir)); else SET_STRING_ELT(result_characters_single, 23, NA_STRING);
   if(Mptr->CHINO_LOC[0] != '\0') SET_STRING_ELT(result_characters_single, 24, mkChar(Mptr->CHINO_LOC)); else SET_STRING_ELT(result_characters_single, 24, NA_STRING);
   if(Mptr->VISNO_LOC[0] != '\0') SET_STRING_ELT(result_characters_single, 25, mkChar(Mptr->VISNO_LOC)); else SET_STRING_ELT(result_characters_single, 25, NA_STRING);
-  if(Mptr->charPrevailVsby[0] != '\0') SET_STRING_ELT(result_characters_single, 26, mkChar(Mptr->charPrevailVsby)); else SET_STRING_ELT(result_characters_single, 26, NA_STRING);
-  if(Mptr->charVertVsby[0] != '\0') SET_STRING_ELT(result_characters_single, 27, mkChar(Mptr->charVertVsby)); else SET_STRING_ELT(result_characters_single, 27, NA_STRING);
+  // if(Mptr->charPrevailVsby[0] != '\0') SET_STRING_ELT(result_characters_single, 26, mkChar(Mptr->charPrevailVsby)); else SET_STRING_ELT(result_characters_single, 26, NA_STRING);
+  // if(Mptr->charVertVsby[0] != '\0') SET_STRING_ELT(result_characters_single, 27, mkChar(Mptr->charVertVsby)); else SET_STRING_ELT(result_characters_single, 27, NA_STRING);
   if(Mptr->TS_LOC[0] != '\0') SET_STRING_ELT(result_characters_single, 28, mkChar(Mptr->TS_LOC)); else SET_STRING_ELT(result_characters_single, 28, NA_STRING);
   if(Mptr->TS_MOVMNT[0] != '\0') SET_STRING_ELT(result_characters_single, 29, mkChar(Mptr->TS_MOVMNT)); else SET_STRING_ELT(result_characters_single, 29, NA_STRING);
   for(i = 0; i < 10; i++) if(Mptr->WxObstruct[i][0] != '\0') SET_STRING_ELT(result_characters_WxObstruct, i, mkChar(Mptr->WxObstruct[i])); else SET_STRING_ELT(result_characters_WxObstruct, i, NA_STRING);

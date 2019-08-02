@@ -48,29 +48,24 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 float fracPart( char *string )
 {
- 
-   /***************************/
-   /* DECLARE LOCAL VARIABLES */
-   /***************************/
- 
-   char buf[ 6 ],
+   char buf[ 32 ],
         *slash;
  
    float numerator,
          denominator;
  
-   /*************************/
-   /* START BODY OF ROUTINE */
-   /*************************/
- 
    slash = strchr(string, '/');
+
+   if (slash == NULL) {
+    return ((float) atoi(string));
+   }
  
-   memset(buf , '\0', 6);
+   memset(buf , '\0', sizeof(buf));
    strncpy( buf, string, slash-string);
  
    numerator = (float) atoi(buf);
  
-   memset(buf , '\0', 6);
+   memset(buf , '\0', sizeof(buf));
    strcpy( buf, slash+1);
  
    denominator = (float) atoi(buf);
@@ -82,3 +77,4 @@ float fracPart( char *string )
  
 }
  
+// vim: set ts=4 sw=4 sts=4 noet :

@@ -19,20 +19,81 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "metar_structs.h"
 
+char* distance_as_string(Distance_Unit unit) {
+   switch (unit) {
+   case DIST_FEET: return "FT";
+   case DIST_METERS: return "M";
+   default: return "UNKNOWN UNIT";
+   }
+}
+
+/* NB this is pretty insecure insofar as it blindly writes into string
+ * on the assuption that string can fit it all 
+ * */
+
+void sprintf_tornadic_info (char * string, Decoded_METAR *Mptr) {
+   char temp[100];
+ 
+   if ( Mptr->TornadicType[0] != '\0' ) {
+      sprintf(temp, "TORNADIC ACTVTY TYPE: %s\n",
+         Mptr->TornadicType );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->BTornadicHour != MAXINT ) {
+      sprintf(temp, "TORN. ACTVTY BEGHOUR: %d\n",
+         Mptr->BTornadicHour );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->BTornadicMinute != MAXINT ) {
+      sprintf(temp, "TORN. ACTVTY BEGMIN : %d\n",
+         Mptr->BTornadicMinute );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->ETornadicHour != MAXINT ) {
+      sprintf(temp, "TORN. ACTVTY ENDHOUR: %d\n",
+         Mptr->ETornadicHour );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->ETornadicMinute != MAXINT ) {
+      sprintf(temp, "TORN. ACTVTY ENDMIN : %d\n",
+         Mptr->ETornadicMinute );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->TornadicDistance != MAXINT ) {
+      sprintf(temp, "TORN. DIST. FROM STN: %d\n",
+         Mptr->TornadicDistance );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->TornadicLOC[0] != '\0' ) {
+      sprintf(temp, "TORNADIC LOCATION   : %s\n",
+         Mptr->TornadicLOC );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->TornadicDIR[0] != '\0' ) {
+      sprintf(temp, "TORNAD. DIR FROM STN: %s\n",
+         Mptr->TornadicDIR );
+      strcat(string, temp);
+   }
+ 
+   if ( Mptr->TornadicMovDir[0] != '\0' ) {
+      sprintf(temp, "TORNADO DIR OF MOVM.: %s\n",
+         Mptr->TornadicMovDir );
+      strcat(string, temp);
+   }
+}
+ 
 
 void sprint_metar (char * string, Decoded_METAR *Mptr)
 {
- 
-   /***************************/
-   /* DECLARE LOCAL VARIABLES */
-   /***************************/
- 
    int i;
    char temp[100];
- 
-   /*************************/
-   /* START BODY OF ROUTINE */
-   /*************************/
  
    sprintf(string, "\n\n\n/*******************************************/\n");
    strcat(string, "/*    THE DECODED METAR REPORT FOLLOWS     */\n");
@@ -127,12 +188,7 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       sprintf(temp, "PREVAIL VSBY (SM)   : %.3f\n",Mptr->prevail_vsbySM);
       strcat(string, temp);
    }
-/*
-   if ( Mptr->charPrevailVsby[0] != '\0' ) {
-      sprintf(temp, "PREVAIL VSBY (CHAR) : %s\n",Mptr->charPrevailVsby);
-      strcat(string, temp);
-   }
-*/
+
    if ( Mptr->vsby_Dir[ 0 ] != '\0' ) {
       sprintf(temp, "VISIBILITY DIRECTION: %s\n",Mptr->vsby_Dir);
       strcat(string, temp);
@@ -143,7 +199,7 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       strcat(string, temp);
    }
  
-   for ( i = 0; i < 12; i++ )
+   for ( i = 0; i < MAX_RUNWAYS; i++ )
    {
       if( Mptr->RRVR[i].runway_designator[0] != '\0' ) {
          sprintf(temp, "RUNWAY DESIGNATOR   : %s\n",
@@ -152,7 +208,8 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       }
  
       if( Mptr->RRVR[i].visRange != MAXINT ) {
-         sprintf(temp, "R_WAY VIS RANGE (FT): %d\n",
+         sprintf(temp, "R_WAY VIS RANGE (%s): %d\n",
+                 distance_as_string(Mptr->RRVR[i].distance_unit),
                  Mptr->RRVR[i].visRange);
          strcat(string, temp);
       }
@@ -173,13 +230,15 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       }
  
       if( Mptr->RRVR[i].Max_visRange != MAXINT ) {
-         sprintf(temp, "MX R_WAY VISRNG (FT): %d\n",
+         sprintf(temp, "MX R_WAY VISRNG (%s): %d\n",
+                 distance_as_string(Mptr->RRVR[i].distance_unit),
                  Mptr->RRVR[i].Max_visRange);
          strcat(string, temp);
       }
  
       if( Mptr->RRVR[i].Min_visRange != MAXINT ) {
-         sprintf(temp, "MN R_WAY VISRNG (FT): %d\n",
+         sprintf(temp, "MN R_WAY VISRNG (%s): %d\n",
+                 distance_as_string(Mptr->RRVR[i].distance_unit),
                  Mptr->RRVR[i].Min_visRange);
          strcat(string, temp);
       }
@@ -220,70 +279,53 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       strcat(string, temp);
    }
  
-   i = 0;
-   while ( Mptr->WxObstruct[i][0] != '\0' && i < MAXWXSYMBOLS )
+   for (i = 0; Mptr->WxObstruct[i][0] != '\0' && i < MAXWXSYMBOLS; i++)
    {
       sprintf(temp, "WX/OBSTRUCT VISION  : %s\n",
          Mptr->WxObstruct[i] );
       strcat(string, temp);
-      i++;
    }
+
+   for (i = 0; i < MAX_PARTIAL_OBSCURATIONS; i++) {
+       if ( Mptr->PartialObscurationAmt[i][0] != '\0' ) {
+	  sprintf(temp, "OBSCURATION AMOUNT  : %s\n",
+		Mptr->PartialObscurationAmt[i]);
+	  strcat(string, temp);
+       }
+     
+       if ( Mptr->PartialObscurationPhenom[i][0] != '\0' ) {
+	  sprintf(temp, "OBSCURATION PHENOM  : %s\n",
+		Mptr->PartialObscurationPhenom[i]);
+	  strcat(string, temp);
+       }
+    }
  
-   if ( Mptr->PartialObscurationAmt[0][0] != '\0' ) {
-      sprintf(temp, "OBSCURATION AMOUNT  : %s\n",
-            &(Mptr->PartialObscurationAmt[0][0]));
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->PartialObscurationPhenom[0][0] != '\0' ) {
-      sprintf(temp, "OBSCURATION PHENOM  : %s\n",
-            &(Mptr->PartialObscurationPhenom[0][0]));
-      strcat(string, temp);
-   }
- 
- 
-   if ( Mptr->PartialObscurationAmt[1][0] != '\0' ) {
-      sprintf(temp, "OBSCURATION AMOUNT  : %s\n",
-            &(Mptr->PartialObscurationAmt[1][0]));
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->PartialObscurationPhenom[1][0] != '\0' ) {
-      sprintf(temp, "OBSCURATION PHENOM  : %s\n",
-            &(Mptr->PartialObscurationPhenom[1][0]));
-      strcat(string, temp);
-   }
- 
-   i = 0;
-   while ( Mptr->cldTypHgt[ i ].cloud_type[0] != '\0' &&
-                     i < 6 )
+   for (i = 0;  Mptr->cloudGroup[ i ].cloud_type[0] != '\0' &&
+                     i < MAX_CLOUD_GROUPS; i++ )
    {
-      if ( Mptr->cldTypHgt[ i ].cloud_type[0] != '\0' ) {
+      if ( Mptr->cloudGroup[ i ].cloud_type[0] != '\0' ) {
          sprintf(temp, "CLOUD COVER         : %s\n",
-            Mptr->cldTypHgt[ i ].cloud_type);
+            Mptr->cloudGroup[ i ].cloud_type);
          strcat(string, temp);
       }
  
-      if ( Mptr->cldTypHgt[ i ].cloud_hgt_char[0] != '\0' ) {
+      if ( Mptr->cloudGroup[ i ].cloud_hgt_char[0] != '\0' ) {
          sprintf(temp, "CLOUD HGT (CHARAC.) : %s\n",
-            Mptr->cldTypHgt[ i ].cloud_hgt_char);
+            Mptr->cloudGroup[ i ].cloud_hgt_char);
          strcat(string, temp);
       }
  
-      if ( Mptr->cldTypHgt[ i ].cloud_hgt_meters != MAXINT) {
+      if ( Mptr->cloudGroup[ i ].cloud_hgt_meters != MAXINT) {
          sprintf(temp, "CLOUD HGT (METERS)  : %d\n",
-            Mptr->cldTypHgt[ i ].cloud_hgt_meters);
+            Mptr->cloudGroup[ i ].cloud_hgt_meters);
          strcat(string, temp);
       }
  
-      if ( Mptr->cldTypHgt[ i ].other_cld_phenom[0] != '\0' ) {
+      if ( Mptr->cloudGroup[ i ].other_cld_phenom[0] != '\0' ) {
          sprintf(temp, "OTHER CLOUD PHENOM  : %s\n",
-            Mptr->cldTypHgt[ i ].other_cld_phenom);
+            Mptr->cloudGroup[ i ].other_cld_phenom);
          strcat(string, temp);
       }
- 
-      i++;
- 
    }
  
    if ( Mptr->temp != MAXINT ) {
@@ -307,62 +349,9 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
          Mptr->hectoPasc_altstng );
       strcat(string, temp);
    }
- 
-   if ( Mptr->TornadicType[0] != '\0' ) {
-      sprintf(temp, "TORNADIC ACTVTY TYPE: %s\n",
-         Mptr->TornadicType );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->BTornadicHour != MAXINT ) {
-      sprintf(temp, "TORN. ACTVTY BEGHOUR: %d\n",
-         Mptr->BTornadicHour );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->BTornadicMinute != MAXINT ) {
-      sprintf(temp, "TORN. ACTVTY BEGMIN : %d\n",
-         Mptr->BTornadicMinute );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->ETornadicHour != MAXINT ) {
-      sprintf(temp, "TORN. ACTVTY ENDHOUR: %d\n",
-         Mptr->ETornadicHour );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->ETornadicMinute != MAXINT ) {
-      sprintf(temp, "TORN. ACTVTY ENDMIN : %d\n",
-         Mptr->ETornadicMinute );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->TornadicDistance != MAXINT ) {
-      sprintf(temp, "TORN. DIST. FROM STN: %d\n",
-         Mptr->TornadicDistance );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->TornadicLOC[0] != '\0' ) {
-      sprintf(temp, "TORNADIC LOCATION   : %s\n",
-         Mptr->TornadicLOC );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->TornadicDIR[0] != '\0' ) {
-      sprintf(temp, "TORNAD. DIR FROM STN: %s\n",
-         Mptr->TornadicDIR );
-      strcat(string, temp);
-   }
- 
-   if ( Mptr->TornadicMovDir[0] != '\0' ) {
-      sprintf(temp, "TORNADO DIR OF MOVM.: %s\n",
-         Mptr->TornadicMovDir );
-      strcat(string, temp);
-   }
- 
- 
+
+    sprintf_tornadic_info (string, Mptr);
+
    if ( Mptr->autoIndicator[0] != '\0' ) {
          sprintf(temp, "AUTO INDICATOR      : %s\n",
                           Mptr->autoIndicator);
@@ -607,10 +596,10 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       strcat(string, temp);
    }
  
-   for( i = 0; i < 6; i++ ) {
+   for( i = 0; i < MAX_SURFACE_OBSCURATIONS; i++ ) {
       if( Mptr->SfcObscuration[i][0] != '\0' ) {
          sprintf(temp, "SfcObscuration      : %s\n",
-                   &(Mptr->SfcObscuration[i][0]) );
+                   Mptr->SfcObscuration[i]);
          strcat(string, temp);
       }
    }
@@ -871,12 +860,6 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
       strcat(string, temp);
    }
  
- /*
-   if( Mptr->charVertVsby[0] != '\0' )
-      sprintf(temp, "Vert. Vsby (CHAR)   : %s\n",
-                  Mptr->charVertVsby );
- */
- 
    if ( Mptr->QFE != MAXINT ) {
       sprintf(temp, "QFE                 : %d\n", Mptr->QFE);
       strcat(string, temp);
@@ -900,12 +883,13 @@ void sprint_metar (char * string, Decoded_METAR *Mptr)
    strcat(string, "\n\n\n");
 }
 
-void prtDMETR (Decoded_METAR *Mptr)
+
+void print_decoded_metar (Decoded_METAR *Mptr)
 {
 	char string[5000];
 	
 	sprint_metar(string, Mptr);
-	//printf(string);
+	fputs(string, stdout);
 }
 
-
+// vim: set ts=4 sw=4 sts=4 noet :

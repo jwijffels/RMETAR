@@ -1,1 +1,1 @@
-PKG_CFLAGS = -w
+PKG_CFLAGS = -Wall

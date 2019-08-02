@@ -988,7 +988,7 @@ typedef struct sw_dir_info_rec {
   char flag1;
   char flag2;
   char flag3;
-  char class;
+  //char class;
   short int domestic_cat_num;
   char afos_tmp;
   char ccb[2];
@@ -1093,7 +1093,7 @@ int strhash(char *);
  
 void reverse(char *);
  
-//MDSP_BOOL itoa(int, char *, int);
+MDSP_BOOL itoa(int, char *, int);
  
 int getsnn(char * , int);
  
@@ -1175,8 +1175,8 @@ MDSP_BOOL std2ccap(Devaddr *, Diskaddr *, char *);
 char *strupr(char *);
 char *strlwr(char *);
 /* char *strdup(char *); */
-/* char *strndup(char *, int); */
-//int strcmpi(char *, char *);
+//char *strndup(char *, int);
+int strcmpi(char *, char *);
  
 /* void *memccpy(void *, void *, int, unsigned); */
  
@@ -1187,13 +1187,13 @@ char *rptfmt2(char *);
 char *rptfmti(char *, unsigned short int);
 char *rptfmtni(char *, unsigned short int);
  
-char *strnstr(char *, char *, size_t);
+// char *strnstr(char *, char *, size_t);
  
 int stregion(int);
 int ccregion(char *);
 char *rgnname(int);
  
-void *memrchr(const void *, int, size_t);
+// void *memrchr(const void *, int, size_t);
  
 MDSP_BOOL sysmonms(char *, char *, ...);
 MDSP_BOOL sysmoncl(char *);
