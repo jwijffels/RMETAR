@@ -52,12 +52,13 @@ make_underscore_names <- function(x){
 #' @return a list of elements with information contained in the METAR string.
 #' The list contains data of a similar structure as the decoded_METAR structure
 #' in /src/metar.h. See the examples.
+#' @useDynLib RMETAR decodeMETAR_
 #' @export
-#' @example inst/examples/decodemetar.R
+#' @example inst/examples/example_decodemetar.R
 decodemetar <- function(x, printdecodedmetar = FALSE){
   x <- as.character(x)
   printdecodedmetar <- as.logical(printdecodedmetar)
-  result <- .Call("decodeMETAR", x, printdecodedmetar, PACKAGE="RMETAR")
+  result <- .Call(decodeMETAR_, x, printdecodedmetar, PACKAGE="RMETAR")
   
   # Assign names to list elements
   names(result) <- names_result

@@ -2,3 +2,4 @@
 
 export(decodemetar)
 useDynLib(RMETAR, .registration = TRUE)
+useDynLib(RMETAR,decodeMETAR_)

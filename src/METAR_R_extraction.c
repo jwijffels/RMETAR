@@ -176,7 +176,9 @@ SEXP extract_cloud_Conditions(Decoded_METAR *Mptr, int element){
   return(result);
 }
 
-SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
+SEXP decodeMETAR_(SEXP metarcode, SEXP printdecodedmetar) {
   PROTECT(metarcode = AS_CHARACTER(metarcode));
   PROTECT(printdecodedmetar = AS_INTEGER(printdecodedmetar));
   
@@ -215,6 +217,9 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   Decoded_METAR *Mptr = &Metar;
   int ErReturn;
   ErReturn = DcdMETAR(inputstring, Mptr);
+  UNUSED(ErReturn);
+  
+  
   sprint_metar(printout, Mptr);
   SET_STRING_ELT(result_printout, 0, mkChar(printout));
   
@@ -240,7 +245,7 @@ SEXP decodeMETAR(SEXP metarcode, SEXP printdecodedmetar) {
   CloudLowMediumHigh[0] = Mptr->CloudLow;
   CloudLowMediumHigh[1] = Mptr->CloudMedium;
   CloudLowMediumHigh[2] = Mptr->CloudHigh;
-  if(CloudLowMediumHigh[0] != '\0' | CloudLowMediumHigh[1] != '\0' | CloudLowMediumHigh[2] != '\0') SET_STRING_ELT(result_characters_single, 17, mkChar(CloudLowMediumHigh)); else SET_STRING_ELT(result_characters_single, 17, NA_STRING);
+  if((CloudLowMediumHigh[0] != '\0') | (CloudLowMediumHigh[1] != '\0') | (CloudLowMediumHigh[2] != '\0')) SET_STRING_ELT(result_characters_single, 17, mkChar(CloudLowMediumHigh)); else SET_STRING_ELT(result_characters_single, 17, NA_STRING);
   if(Mptr->CIG_2ndSite_LOC[0] != '\0') SET_STRING_ELT(result_characters_single, 18, mkChar(Mptr->CIG_2ndSite_LOC)); else SET_STRING_ELT(result_characters_single, 18, NA_STRING);
   if(Mptr->VIRGA_DIR[0] != '\0') SET_STRING_ELT(result_characters_single, 19, mkChar(Mptr->VIRGA_DIR)); else SET_STRING_ELT(result_characters_single, 19, NA_STRING);
   if(Mptr->TornadicType[0] != '\0') SET_STRING_ELT(result_characters_single, 20, mkChar(Mptr->TornadicType)); else SET_STRING_ELT(result_characters_single, 20, NA_STRING);
