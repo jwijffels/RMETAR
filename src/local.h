@@ -1033,26 +1033,26 @@ int lmsg(const char *, const char *, ...);
 int emsg(const char *, const char *, ...);
 int omsg(const char *, const char *, ...);
  
-#pragma linkage(ASCTOEB, OS)
+//#pragma linkage(ASCTOEB, OS)
 void ASCTOEB(char *, int);
  
-#pragma linkage(EAXLATE, OS)
+//#pragma linkage(EAXLATE, OS)
 void EAXLATE(char *, int);
  
-#pragma linkage(PASCTOEB, OS)
+//#pragma linkage(PASCTOEB, OS)
 void PASCTOEB(char *, int);
  
 char **bldhdarr(char *);
  
 void dalchdar(char **);
  
-#pragma linkage(CCAPREAD, OS)
+//#pragma linkage(CCAPREAD, OS)
 void *CCAPREAD(char *, int);
  
-#pragma linkage(CCAPWRIT, OS)
+//#pragma linkage(CCAPWRIT, OS)
 void CCAPWRIT(char *, char *, int);
  
-#pragma linkage(PPTOI, OS)
+//#pragma linkage(PPTOI, OS)
 int PPTOI(char);
  
 char itopp(int);
@@ -1116,10 +1116,10 @@ int addrcmp(Diskaddr *, Diskaddr *);
 void incraddr(Diskaddr *, Diskaddr *, Diskaddr *);
 void decraddr(Diskaddr *, Diskaddr *, Diskaddr *);
  
-#pragma linkage(readrec, OS)
+//#pragma linkage(readrec, OS)
 char *readrec(Diskaddr *, Devaddr *, int, void *);
  
-#pragma linkage(writerec, OS)
+//#pragma linkage(writerec, OS)
 int writerec(Diskaddr*, Devaddr *, int, void *);
  
 char prhold(char *, ...);
