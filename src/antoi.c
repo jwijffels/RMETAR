@@ -78,10 +78,6 @@ int antoi(char * string, int len)
  
 } /* end antoi */
  
-<<<<<<< update-mdsplib
-#pragma page(1)
+//#pragma page(1)
 
 // vim: set ts=4 sw=4 sts=4 noet :
-=======
-//#pragma page(1)
->>>>>>> Use script to comment all pragma statements that throw compiler warnings #3

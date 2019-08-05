@@ -26,23 +26,13 @@ char *BldSynop( Decoded_METAR * , char * );
 /*char *Sec3MeSm(Decoded_METAR *, char *);*/
 /*char *Sec5MeSm(Decoded_METAR *, char *);*/
 #endif
-<<<<<<< update-mdsplib:src/metar_test.c
 
 void print_decoded_metar( Decoded_METAR *);
 int decode_metar( char *, Decoded_METAR * );
 
-#pragma page(1)
-#pragma subtitle(" ")
-#pragma subtitle("subtitle - description                       ")
-=======
- 
-void prtDMETR( Decoded_METAR *);
-int DcdMETAR( char *, Decoded_METAR * );
- 
 //#pragma page(1)
 //#pragma subtitle(" ")
 //#pragma subtitle("subtitle - description                       ")
->>>>>>> Use script to comment all pragma statements that throw compiler warnings #3:src/drvmetar.c
 /********************************************************************/
 /*                                                                  */
 /*  Title:         dRVMETAR                                         */
@@ -69,13 +59,8 @@ int DcdMETAR( char *, Decoded_METAR * );
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-<<<<<<< update-mdsplib:src/metar_test.c
-#pragma page(1)
-main()
-=======
 //#pragma page(1)
-int main()
->>>>>>> Use script to comment all pragma statements that throw compiler warnings #3:src/drvmetar.c
+main()
 {
  static char *string[] =
  {
@@ -463,7 +448,6 @@ int main()
   "SPECI DGFI 041430Z 18045G56KT M1/4SM R15/0200FT FC +TS VV010 20/18 "
   "M20/M18 A2900 RMK A02A PK WND 18056/28 RAB15E25TSB20 FCB1430 PRESFR "
   "SLP 701 P 0254 199/M182",
-<<<<<<< Updated upstream:src/metar_test.c
 
   "METAR APIT 171755Z AUTO 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
   "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
@@ -663,247 +647,6 @@ int main()
     j++;
 
   }
-=======
- 
- "METAR APIT 171755Z AUTO 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 4/369 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 8/563 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1 1/2V2 SLP875 SGB1213E1225",
- 
- "NZWN 1700Z 35030G49KT 320V030 20KM 02 5SC021 7SC046 12/08 "
- "          Q0994.2 TEMPO 6000 RA 5ST012 2CB015 RMK SLP056 "
- "RAE0123",
- 
- "SPECI APIT 171755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 8/321 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1 SLP875 FGB1713",
- 
- "APIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1V2 SLP875",
- 
- 
- "APIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1 1/2V2 1/2 SLP875",
- 
- "APIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1V2 1/2 SLP875",
- 
- 
- "EGPF 1720Z 00000KT 9999 -SHRA STC014 SCT020CB BNK024 12/09 "
- "Q1003 NOSIG",
- 
- "NZAA 1700Z 03010KT 30KM 03 5CU022 7SC035 11/07 Q1006.5 NOSIG",
- "NZWN 1700Z 35030G49KT 320V030 20KM 02 5SC021 7SC046 12/08 "
- "     Q0994.2 TEMPO 6000 RA 5ST012 2CB015 RMK KAUKAU 30050KT",
- "DGAA 1800Z 22012KT 9999 SCT009 BKN120 25/21 Q1015",
- "DAAT 1830Z 30010KT CAVOK 29/06 Q1019",
- 
- "GQPP 1800Z 34023KT 3000 DRSA SKC 24/20 Q1011 NSG",
- "DAAG 1830Z 06006KT 9999 SCT020 25/22 Q1015",
- "DABB 1830Z 04010KT 9999 SCT030TCU SCT033CB 27/18 Q1017",
- "DABC 1830Z 00000KT 9999 SCT026TCU SCT036CB 22/18 Q1020 RETS",
- 
- "NZAA 1700Z 03010KT 30KM 03 5CU022 7SC035 11/07 Q1006.5 NOSIG",
- "NZWN 1700Z 35030G49KT 320V030 20KM 02 5SC021 7SC046 12/08 "
- "          Q0994.2 TEMPO 6000 RA 5ST012 2CB015 RMK K",
- "NZWN 1700Z 35030G49KT 320V030 20KM 02 5SC021 7SC046 12/08 "
- "     Q0994.2 TEMPO 6000 RA 5ST012 2CB015 RMK KAUKAU 30050KT",
- "DGAA 1800Z 22012KT 9999 SCT009 BKN120 25/21 Q1015",
- 
- "GFLL 1900Z NIL",
- 
- "GOOY 1800Z 03006G17KT 340V080 6000 TSRA BKN016 BKN030CB "
- "BKN133 26/23 Q1013 NOSIG",
- 
- "GCXO 1930Z 32018KT 8000 SCT003 SCT007 18/16 Q1019",
- 
- "APIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1 1/2V2",
- 
- "BPIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1V2",
- 
- "CPIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1V2 1/2",
- 
- "DPIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1 1/2V2 1/2",
- 
- "EPIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 1/2V3/4",
- 
- "FPIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 3/4V2 1/2",
- 
- "GPIT 1755Z 22015G25KT 1 3/4SM R22L/2700FT R16/1200FT "
- "R34/1000V1600FT R01L/P6000FT R04RR/900FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/16 A2992 "
- "RMK 58033 6003/ TWELVE 70125 10039 20029 410840112 "
- "PCPN 0009 WSHFT 1715 PK WND 2032/1725 "
- "CIG 20V25 WND 12V25 TWR VIS 2 1/2 "
- "SFC VIS 1 1/2 VIS 3/4V3",
- 
- "KPIT 1935Z 22015G25KT 1 3/4SM R22L/2700FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB M18/M16 A2992",
- 
- "KPIT 1935Z 22015G25KT 1 3/4SM R22L/2700FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB M18/16 A2992",
- 
- "KPIT 1935Z 22015G25KT 1 3/4SM R22L/2700FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB 18/M16 A2992",
- 
- "KPIT 1935Z 22015G25KT 1 3/4SM R22L/2700FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB MM/M16 A2992",
- 
- "KPIT 1935Z 22015G25KT 1 3/4SM R22L/2700FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB MM/16 A2992",
- 
- "KPIT 1935Z 22015G25KT 1 3/4SM R22L/2700FT "
- "TSRA -DZ FG +SNPE SCT005 BKN010 OVC250CB M18/MM A2992",
- 
- 
-        NULL};
- 
-   /***************************/
-   /* DECLARE LOCAL VARIABLES */
-   /***************************/
- 
-   Decoded_METAR Metar;
-   Decoded_METAR *Mptr = &Metar;
-   int j,
-       ErReturn;
-//    static char *synopRTRN = NULL;
-//    char bltn_prefix[20];
- 
-   /***************************************************/
-   /* START BODY OF MAIN ROUTINE FOR CALLING DcdMETAR */
-   /***************************************************/
- 
-   j = 0;
- 
-   while( string[j] != NULL)
-   {
-            /*-- PRINT INPUT METAR REPORT ----------------------------*/
-      //printf("\n\nINPUT METAR REPORT:\n\n %s\n\n",string[j] );
- 
-            /*-- DECODE INPUT REPORT ---------------------------------*/
-      if ( (ErReturn = DcdMETAR( string[ j ], Mptr )) != 0 )
-         //printf("DcdMETAR:  Error Return Number: %d\n",ErReturn);
- 
-            /*-- PRINT DECODED METAR REPORT ELEMENTS -----------------*/
-      //printf("\n\nFINAL DECODED PRODUCT...\n\n");
-      prtDMETR( Mptr );
-// #ifdef OLDSTUFF
-// /************************************************/
-// /*  Convert Decoded METAR into Synoptic format  */
-// /************************************************/
- 
-//       //printf("Just after call to prtDMETR\n");
- 
-//                sprintf( bltn_prefix, "AAXX YYGGi##," );
-//                synopRTRN = BldSynop( Mptr, bltn_prefix );
-//             //printf("After BldSynop, SynopRep =:\n%s\n",synopRTRN);
-//             /**********************************************************/
-//             /*-- ENCODE SECTION 0 OF THE SYNTHETIC SYNOPTIC REPORT ---*/
-//             /**********************************************************/
-//       //printf("Just before call to Sec0MeSM\n");
- 
-//       if( (synopRTRN = Sec0MeSm( Mptr )) == NULL )
-//          //printf("Sec0MeSm returned a NULL pointer\n");
-//       else
-//          //printf("After Sec0MeSm: %s\n",synopRTRN);
- 
-//             /**********************************************************/
-//             /*-- ENCODE SECTION 1 OF THE SYNTHETIC SYNOPTIC REPORT ---*/
-//             /**********************************************************/
-//       if( synopRTRN != NULL )
-//          synopRTRN = Sec1MeSm( Mptr,synopRTRN );
-//             //printf("After Sec1MeSm: %s\n",synopRTRN);
- 
-//             /**********************************************************/
-//             /*-- ENCODE SECTION 3 OF THE SYNTHETIC SYNOPTIC REPORT ---*/
-//             /**********************************************************/
- 
-//       if( synopRTRN != NULL )
-//          synopRTRN = Sec3MeSm( Mptr,synopRTRN );
-//             //printf("After Sec3MeSm: %s\n",synopRTRN);
- 
-//             /**********************************************************/
-//             /*-- ENCODE SECTION 5 OF THE SYNTHETIC SYNOPTIC REPORT ---*/
-//             /**********************************************************/
- 
-//       if( synopRTRN != NULL )
-//          synopRTRN = Sec5MeSm( Mptr,synopRTRN);
-//             //printf("After Sec5MeSm: %s\n",synopRTRN);
- 
-//             /**********************************************************/
-//             /*-- PRINT THE ENCODED SYNTHETIC SYNOPTIC REPORT ---------*/
-//             /**********************************************************/
- 
-//       if( synopRTRN != NULL ) {
-//          //printf("\n\nOutput Synoptic Report:  %s\n\n",synopRTRN);
-//          free( synopRTRN);
-//       }
- 
-// #endif
- 
-      j++;
- 
-   }
- 
->>>>>>> Stashed changes:src/drvmetar.c
 }
 
 // vim: set ts=4 sw=4 sts=4 noet :

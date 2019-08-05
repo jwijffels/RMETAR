@@ -227,10 +227,6 @@ char *nxtxdigi(char *s) {
 } /* end nxtxdigi */
  
  
-<<<<<<< update-mdsplib
-#pragma page(1)
+//#pragma page(1)
 
 // vim: set ts=4 sw=4 sts=4 noet :
-=======
-//#pragma page(1)
->>>>>>> Use script to comment all pragma statements that throw compiler warnings #3

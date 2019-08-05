@@ -8,13 +8,13 @@
 <!-- badges: end -->
 
 The goal of RMETAR is to provide a METAR decoder for R users, connecting
-to mdsplib (METAR Decoder Software Package Library -
-<http://mdsplib.sourceforge.net/>)
+to `mdsplib` (METAR Decoder Software Package Library -
+<https://github.com/flightaware/mdsplib>)
 
 ## Installation
 
-You can install the released version of RMETAR from
-[CRAN](https://CRAN.R-project.org) with:
+~~You can install the released version of RMETAR from
+[CRAN](https://CRAN.R-project.org) with:~~
 
 ``` r
 install.packages("RMETAR")
@@ -104,7 +104,7 @@ str(result, max.level = 2)
 #>   ..- attr(*, "names")= chr [1:42] "indeterminant3_6hrprecip" "indeterminant_24hrprecip" "cigno" "slpno" ...
 #>  $ integers            : Named int [1:37] NA 8 58 24 NA NA NA 18 12 NA ...
 #>   ..- attr(*, "names")= chr [1:37] "tornadicdistance" "ob_hour" "ob_minute" "ob_date" ...
-#>  $ numerics            : Named num [1:23] 5.52e-313 NA NA NA 1.00e+01 ...
+#>  $ numerics            : Named num [1:23] 4.24e-313 NA NA NA 1.00e+01 ...
 #>   ..- attr(*, "names")= chr [1:23] "sectorvsby" "waterequivsnow" "vsby_2ndsite" "prevail_vsbysm" ...
 #>  $ runway.visualrange  :List of 12
 #>   ..$ :List of 7

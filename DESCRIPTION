@@ -7,13 +7,13 @@ Description: Functions to extract weather information from METAR reports
 Type: Package
 License: LGPL-2.1
 Version: 1.0.0.9000
-Date: 2019-08-01
+Date: 2019-08-05
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), 
-    person("Eric", "McCarthy", role = c("cph"), email = "eric@desert.net")
+    person("Eric", "McCarthy", role = c("cph"), email = "eric@limulus.net")
     )
 Copyright: C code in the src folder is taken and adapted from
-    http://sourceforge.net/projects/mdsplib/ for which Copyright belongs to
+    https://github.com/flightaware/mdsplib for which Copyright belongs to
     Eric McCarthy. This code has LGPL-2.1 license.
 URL: http://www.bnosac.be
 Suggests:
