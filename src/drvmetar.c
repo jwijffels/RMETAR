@@ -30,9 +30,9 @@ char *BldSynop( Decoded_METAR * , char * );
 void prtDMETR( Decoded_METAR *);
 int DcdMETAR( char *, Decoded_METAR * );
  
-#pragma page(1)
-#pragma subtitle(" ")
-#pragma subtitle("subtitle - description                       ")
+//#pragma page(1)
+//#pragma subtitle(" ")
+//#pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         dRVMETAR                                         */
@@ -59,7 +59,7 @@ int DcdMETAR( char *, Decoded_METAR * );
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-#pragma page(1)
+//#pragma page(1)
 int main()
 {
    static char *string[] =
