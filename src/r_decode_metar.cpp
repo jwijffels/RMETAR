@@ -171,7 +171,15 @@ List r_decode_metar_(std::string metarcode) {
     .add("TS_LOC",     string_or_na(Mptr->TS_LOC))
     .add("TS_MOVMNT",  string_or_na(Mptr->TS_MOVMNT))
   
-  .add("METAR", Rcpp::CharacterVector::create(invec));
+  .add("METAR", Rf_mkString(invec));
+  
+  
+  // Decode printed string using sprint_metar()
+  char printout[5000];
+  sprint_metar(printout, Mptr);
+  z.add("printout", Rf_mkString(printout));
+    
+  
   
   return z;
 }
