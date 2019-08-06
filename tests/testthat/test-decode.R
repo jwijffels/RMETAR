@@ -4,5 +4,5 @@ test_that("decoding works", {
   result <- decodemetar(x = metarcode)
   
   expect_is(result, "list")
-  expect_equal(result$metar, metarcode)
+  expect_equal(result$METAR, metarcode)
 })
