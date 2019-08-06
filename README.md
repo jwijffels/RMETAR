@@ -59,91 +59,78 @@ library(RMETAR)
 ``` r
 metarcode <- "KSUU 240858Z AUTO 24018KT 10SM CLR 18/12 A2988 RMK AO2 SLPNO T01750124 58003 RVRNO"
 result <- decodemetar(x = metarcode, printdecodedmetar=TRUE)
-#> 
-#> 
-#> 
-#> /*******************************************/
-#> /*    THE DECODED METAR REPORT FOLLOWS     */
-#> /*******************************************/
-#> 
-#> STATION ID          : KSUU
-#> OBSERVATION DAY     : 24
-#> OBSERVATION HOUR    : 8
-#> OBSERVATION MINUTE  : 58
-#> AUTO REPORT         : TRUE
-#> WIND DIRECTION      : 240
-#> WIND SPEED          : 18
-#> WIND UNITS          : KT
-#> PREVAIL VSBY (SM)   : 10.000
-#> RVRNO               : TRUE
-#> CLOUD COVER         : CLR
-#> TEMP. (CELSIUS)     : 18
-#> D.P. TEMP. (CELSIUS): 12
-#> ALTIMETER (INCHES)  : 29.88
-#> AUTO INDICATOR      : AO2
-#> SLPNO               : TRUE
-#> TMP2TENTHS (CELSIUS): 17.5
-#> DPT2TENTHS (CELSIUS): 12.4
-#> CHAR PRESS TENDENCY : 8
-#> PRES. TENDENCY (hPa): 0.3
 ```
 
 The decoded data is in a nested list:
 
 ``` r
 str(result, max.level = 2)
-#> List of 11
-#>  $ characters          :List of 5
-#>   ..$ single                  : Named chr [1:30] NA NA NA "KSUU" ...
-#>   .. ..- attr(*, "names")= chr [1:30] "synoptic_cloud_type" "snow_depth_group" "codename" "stnid" ...
-#>   ..$ wxobstruct              : chr [1:10] NA NA NA NA ...
-#>   ..$ partialobscurationamt   : chr [1:2] NA NA
-#>   ..$ partialobscurationphenom: chr [1:2] NA NA
-#>   ..$ sfcobscuration          : chr [1:6] NA NA NA NA ...
-#>  $ mdspbool            : Named int [1:42] 0 0 0 1 0 0 28248 0 0 1 ...
-#>   ..- attr(*, "names")= chr [1:42] "indeterminant3_6hrprecip" "indeterminant_24hrprecip" "cigno" "slpno" ...
-#>  $ integers            : Named int [1:37] NA 8 58 24 NA NA NA 18 12 NA ...
-#>   ..- attr(*, "names")= chr [1:37] "tornadicdistance" "ob_hour" "ob_minute" "ob_date" ...
-#>  $ numerics            : Named num [1:23] 4.24e-313 NA NA NA 1.00e+01 ...
-#>   ..- attr(*, "names")= chr [1:23] "sectorvsby" "waterequivsnow" "vsby_2ndsite" "prevail_vsbysm" ...
-#>  $ runway.visualrange  :List of 12
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>   ..$ :List of 7
-#>  $ dispatch.visualrange:List of 6
-#>   ..$ vrbl.visrange: int 0
-#>   ..$ below.min.dvr: int 0
-#>   ..$ above.max.dvr: int 0
-#>   ..$ visrange     : int NA
-#>   ..$ max.visrange : int NA
-#>   ..$ min.visrange : int NA
-#>  $ recent.weather      :List of 3
-#>   ..$ :List of 5
-#>   ..$ :List of 5
-#>   ..$ :List of 5
-#>  $ wind                :List of 5
-#>   ..$ windunits: chr "KT"
-#>   ..$ windvrb  : int 0
-#>   ..$ winddir  : int 240
-#>   ..$ windspeed: int 18
-#>   ..$ windgust : int NA
-#>  $ cloud.conditions    :List of 6
-#>   ..$ :List of 4
-#>   ..$ :List of 4
-#>   ..$ :List of 4
-#>   ..$ :List of 4
-#>   ..$ :List of 4
-#>   ..$ :List of 4
-#>  $ printout.mdsplib    : chr "\n\n\n/*******************************************/\n/*    THE DECODED METAR REPORT FOLLOWS     */\n/**********"| __truncated__
-#>  $ metar               : chr "KSUU 240858Z AUTO 24018KT 10SM CLR 18/12 A2988 RMK AO2 SLPNO T01750124 58003 RVRNO"
+#> List of 66
+#>  $ synoptic_cloud_type        : chr NA
+#>  $ snow_depth_group           : chr NA
+#>  $ codeName                   : chr NA
+#>  $ stnid                      : chr "KSUU"
+#>  $ horiz_vsby                 : chr NA
+#>  $ dir_min_horiz_vsby         : chr NA
+#>  $ vsby_Dir                   : chr NA
+#>  $ WxObstruct_0               : chr NA
+#>  $ WxObstruct_1               : chr NA
+#>  $ WxObstruct_2               : chr NA
+#>  $ WxObstruct_3               : chr NA
+#>  $ WxObstruct_4               : chr NA
+#>  $ WxObstruct_5               : chr NA
+#>  $ WxObstruct_6               : chr NA
+#>  $ WxObstruct_7               : chr NA
+#>  $ autoIndicator              : chr "AO2"
+#>  $ VSBY_2ndSite_LOC           : chr NA
+#>  $ SKY_2ndSite_LOC            : chr "\035C\004"
+#>  $ SKY_2ndSite                : chr NA
+#>  $ SectorVsby_Dir             : chr NA
+#>  $ ObscurAloft                : chr NA
+#>  $ ObscurAloftSkyCond         : chr NA
+#>  $ VrbSkyBelow                : chr NA
+#>  $ VrbSkyAbove                : chr NA
+#>  $ LTG_DIR                    : chr NA
+#>  $ CloudLowMediumHigh         : chr NA
+#>  $ CIG_2ndSite_LOC            : chr NA
+#>  $ VIRGA_DIR                  : chr NA
+#>  $ TornadicType               : chr NA
+#>  $ TornadicLOC                : chr NA
+#>  $ TornadicDIR                : chr NA
+#>  $ TornadicMovDir             : chr NA
+#>  $ CHINO_LOC                  : chr NA
+#>  $ VISNO_LOC                  : chr NA
+#>  $ PartialObscurationAmt_0    : chr NA
+#>  $ PartialObscurationAmt_1    : chr NA
+#>  $ PartialObscurationAmt_2    : chr NA
+#>  $ PartialObscurationAmt_3    : chr NA
+#>  $ PartialObscurationAmt_4    : chr NA
+#>  $ PartialObscurationAmt_5    : chr NA
+#>  $ PartialObscurationAmt_6    : chr NA
+#>  $ PartialObscurationPhenom_0 : chr NA
+#>  $ PartialObscurationPhenom_1 : chr NA
+#>  $ PartialObscurationPhenom_2 : chr NA
+#>  $ PartialObscurationPhenom_3 : chr NA
+#>  $ PartialObscurationPhenom_4 : chr NA
+#>  $ PartialObscurationPhenom_5 : chr NA
+#>  $ PartialObscurationPhenom_6 : chr NA
+#>  $ PartialObscurationPhenom_7 : chr NA
+#>  $ PartialObscurationPhenom_8 : chr NA
+#>  $ PartialObscurationPhenom_9 : chr NA
+#>  $ PartialObscurationPhenom_10: chr NA
+#>  $ PartialObscurationPhenom_11: chr NA
+#>  $ SfcObscuration_0           : chr NA
+#>  $ SfcObscuration_1           : chr NA
+#>  $ SfcObscuration_2           : chr NA
+#>  $ SfcObscuration_3           : chr NA
+#>  $ SfcObscuration_4           : chr NA
+#>  $ SfcObscuration_5           : chr NA
+#>  $ SfcObscuration_6           : chr NA
+#>  $ SfcObscuration_7           : chr NA
+#>  $ SfcObscuration_8           : chr NA
+#>  $ SfcObscuration_9           : chr NA
+#>  $ TS_LOC                     : chr NA
+#>  $ TS_MOVMNT                  : chr NA
+#>  $ METAR                      : chr "KSUU 240858Z AUTO 24018KT 10SM CLR 18/12 A2988 RMK AO2 SLPNO T01750124 58003 RVRNO"
 #>  - attr(*, "class")= chr [1:2] "decodedMETAR" "list"
 ```

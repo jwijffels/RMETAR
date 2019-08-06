@@ -23,7 +23,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Eric McCarthy \email{eric@desert.net} [copyright holder]
+  \item Eric McCarthy \email{eric@limulus.net} [copyright holder]
 }
 
 }
