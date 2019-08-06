@@ -21,4 +21,7 @@ x <- download_current_metar_cycle(hour = 7)
 x <- download_current_metar_cycle(hour = 12)
 x <- download_current_metar_cycle(hour = 16)
 x <- download_current_metar_cycle(hour = 23)
+\dontrun{
+x <- lapply(0:23, download_current_metar_cycle)
+}
 }
