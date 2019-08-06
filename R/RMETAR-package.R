@@ -6,5 +6,6 @@
 ## usethis namespace: start
 #' @useDynLib RMETAR, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
+#' @importFrom fasttime fastPOSIXct 
 ## usethis namespace: end
 NULL

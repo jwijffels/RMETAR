@@ -7,9 +7,9 @@
 \title{RMETAR: Functionality to extract weather information from METAR reports.}
 \description{
 Functions to extract weather information from METAR reports
-    (Aviation Routine Weather Reports). Using the METAR Decoder Software
-    Package Library (mdsplib) which is provided by the National Weather
-    Service.
+(Aviation Routine Weather Reports). Using the METAR Decoder Software
+Package Library (mdsplib) which is provided by the National Weather
+Service.
 }
 \seealso{
 Useful links:
