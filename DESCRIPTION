@@ -23,3 +23,7 @@ Suggests:
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp
+Imports: 
+    Rcpp

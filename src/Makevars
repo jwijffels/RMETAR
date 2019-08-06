@@ -1,2 +1,3 @@
-CC = gcc
-CFLAGS = -g -O2 -fPIC -W
+CC = clang
+CFLAGS = -g -O2 -fPIC
+PKG_CXXFLAGS = -std=c++11
