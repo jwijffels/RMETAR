@@ -38,6 +38,6 @@ local({
   extract_folder("include")
   
   
-  source("scripts/comment_all_pragmas.R")
+  # source("scripts/comment_all_pragmas.R")
 })
 
