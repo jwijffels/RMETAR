@@ -19,9 +19,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "metar_structs.h"
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         fracPart                                         */
@@ -44,7 +44,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 float fracPart( char *string )
 {

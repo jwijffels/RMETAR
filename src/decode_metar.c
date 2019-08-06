@@ -17,10 +17,10 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-//#pragma comment (compiler)
-//#pragma comment (date)
-//#pragma comment (timestamp)
-//#pragma pagesize(80)
+// #pragma comment (compiler)
+// #pragma comment (date)
+// #pragma comment (timestamp)
+// #pragma pagesize(80)
 
 
 #include <string.h>
@@ -30,9 +30,9 @@ float fracPart( char * );
 void decode_metar_remark( char **, Decoded_METAR * );
 void print_decoded_metar( Decoded_METAR * );
 
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma subtitle("subtitle - Decode METAR report.              ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma subtitle("subtitle - Decode METAR report.              ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         SaveTokenString                                  */
@@ -65,7 +65,7 @@ void print_decoded_metar( Decoded_METAR * );
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static char **SaveTokenString ( char *string , char *delimeters )
 {
@@ -105,9 +105,9 @@ static char **SaveTokenString ( char *string , char *delimeters )
    return token;
  
 }
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma subtitle("subtitle - Decode METAR report.              ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma subtitle("subtitle - Decode METAR report.              ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         freeTokens                                       */
@@ -130,7 +130,7 @@ static char **SaveTokenString ( char *string , char *delimeters )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static void freeTokens( char **token )
 {
@@ -144,9 +144,9 @@ static void freeTokens( char **token )
    }
    return;
 }
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         init_metar_decoder                               */
@@ -169,7 +169,7 @@ static void freeTokens( char **token )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static void init_metar_decoder( Decoded_METAR *Mptr )
 {
    int i, j;
@@ -431,9 +431,9 @@ static void init_metar_decoder( Decoded_METAR *Mptr )
    return;
  
 }
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         ResetMETARGroup                                  */
@@ -467,7 +467,7 @@ static void init_metar_decoder( Decoded_METAR *Mptr )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static int ResetMETARGroup( int StartGroup,
                             int SaveStartGroup )
 {
@@ -488,10 +488,10 @@ static int ResetMETARGroup( int StartGroup,
  
 }
  
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         CodedHgt2Meters                                  */
@@ -515,7 +515,7 @@ static int ResetMETARGroup( int StartGroup,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static int CodedHgt2Meters( char *token, Decoded_METAR *Mptr )
 {
@@ -529,10 +529,10 @@ static int CodedHgt2Meters( char *token, Decoded_METAR *Mptr )
       return (hgt*30);
 }
  
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isPartialObscuration                             */
@@ -567,7 +567,7 @@ static int CodedHgt2Meters( char *token, Decoded_METAR *Mptr )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static MDSP_BOOL isPartialObscuration( char **string, Decoded_METAR *Mptr,
                           int *NDEX )
 {
@@ -610,10 +610,10 @@ static MDSP_BOOL isPartialObscuration( char **string, Decoded_METAR *Mptr,
       return FALSE;
 }
  
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isCloudLayer                                     */
@@ -643,7 +643,7 @@ static MDSP_BOOL isPartialObscuration( char **string, Decoded_METAR *Mptr,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isCloudLayer( char *token )
 {
@@ -668,10 +668,10 @@ static MDSP_BOOL isCloudLayer( char *token )
                nisdigit((token+3),3)) ? TRUE:FALSE;
 }
  
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isCAVOK                                          */
@@ -698,7 +698,7 @@ static MDSP_BOOL isCloudLayer( char *token )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isCAVOK( char *token, Decoded_METAR *Mptr, int *NDEX )
 {
@@ -715,9 +715,9 @@ static MDSP_BOOL isCAVOK( char *token, Decoded_METAR *Mptr, int *NDEX )
    }
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         parseCloudData                                   */
@@ -739,7 +739,7 @@ static MDSP_BOOL isCAVOK( char *token, Decoded_METAR *Mptr, int *NDEX )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static void parseCloudData( char *token, Decoded_METAR *Mptr, int next)
 {
@@ -767,9 +767,9 @@ static void parseCloudData( char *token, Decoded_METAR *Mptr, int next)
 }
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isSkyConditions                                  */
@@ -791,7 +791,7 @@ static void parseCloudData( char *token, Decoded_METAR *Mptr, int next)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static MDSP_BOOL isSkyConditions( char **skycond, Decoded_METAR *Mptr,
                         int *NDEX )
 {
@@ -997,9 +997,9 @@ static MDSP_BOOL isSkyConditions( char **skycond, Decoded_METAR *Mptr,
    else
       return FALSE;
 }
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         prevailingVisibility                             */
@@ -1021,7 +1021,7 @@ static MDSP_BOOL isSkyConditions( char **skycond, Decoded_METAR *Mptr,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static float prevailingVisibility( char *visibility )
 {
    float Miles_vsby;
@@ -1096,9 +1096,9 @@ static MDSP_BOOL isMBeforeVis( char **m, Decoded_METAR *Mptr,
     return FALSE;
 }
 
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isVisibility                                     */
@@ -1121,7 +1121,7 @@ static MDSP_BOOL isMBeforeVis( char **m, Decoded_METAR *Mptr,
 /*                                                                  */
 /********************************************************************/
  
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isVisibility( char **visblty, Decoded_METAR *Mptr,
                           int *NDEX )
@@ -1364,9 +1364,9 @@ static MDSP_BOOL isVisibility( char **visblty, Decoded_METAR *Mptr,
  
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         variableVisibility                               */
@@ -1388,7 +1388,7 @@ static MDSP_BOOL isVisibility( char **visblty, Decoded_METAR *Mptr,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static MDSP_BOOL variableVisibility( char *string1, char *string2,
                       Decoded_METAR *Mptr, int *NDEX )
 {
@@ -1466,9 +1466,9 @@ static MDSP_BOOL variableVisibility( char *string1, char *string2,
 }
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isMinMaxWinDir                                   */
@@ -1490,7 +1490,7 @@ static MDSP_BOOL variableVisibility( char *string1, char *string2,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 static MDSP_BOOL isMinMaxWinDir( char *string, Decoded_METAR *Mptr,
      int *NDEX )
 {
@@ -1523,9 +1523,9 @@ static MDSP_BOOL isMinMaxWinDir( char *string, Decoded_METAR *Mptr,
          return FALSE;
    }
 }
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isRVR                                            */
@@ -1547,7 +1547,7 @@ static MDSP_BOOL isMinMaxWinDir( char *string, Decoded_METAR *Mptr,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isRVR( char *token, Decoded_METAR *Mptr, int *NDEX,
                      int ndex )
@@ -1620,9 +1620,9 @@ static MDSP_BOOL isRVR( char *token, Decoded_METAR *Mptr, int *NDEX,
 }
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isAltimeterString                                */
@@ -1644,7 +1644,7 @@ static MDSP_BOOL isRVR( char *token, Decoded_METAR *Mptr, int *NDEX,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isAltimeterString( char *token, Decoded_METAR *Mptr, int *NDEX )
 {
@@ -1693,9 +1693,9 @@ static MDSP_BOOL isAltimeterString( char *token, Decoded_METAR *Mptr, int *NDEX 
 }
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isTempGroup                                      */
@@ -1717,7 +1717,7 @@ static MDSP_BOOL isAltimeterString( char *token, Decoded_METAR *Mptr, int *NDEX 
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isTempGroup( char *token, Decoded_METAR *Mptr, int *NDEX)
 {
@@ -1813,9 +1813,9 @@ static MDSP_BOOL isTempGroup( char *token, Decoded_METAR *Mptr, int *NDEX)
  
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isWxToken                                        */
@@ -1837,7 +1837,7 @@ static MDSP_BOOL isTempGroup( char *token, Decoded_METAR *Mptr, int *NDEX)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isWxToken( char *token )
 {
@@ -1856,9 +1856,9 @@ static MDSP_BOOL isWxToken( char *token )
 }
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isPresentWX                                      */
@@ -1880,7 +1880,7 @@ static MDSP_BOOL isWxToken( char *token )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isPresentWX( char *token, Decoded_METAR *Mptr,
                         int *NDEX, int *next )
@@ -1983,9 +1983,9 @@ static MDSP_BOOL isPresentWX( char *token, Decoded_METAR *Mptr,
  
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isStnID                                          */
@@ -2007,7 +2007,7 @@ static MDSP_BOOL isPresentWX( char *token, Decoded_METAR *Mptr,
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isStnId( char *stnID, Decoded_METAR *Mptr, int *NDEX)
 {
@@ -2034,9 +2034,9 @@ static MDSP_BOOL isStnId( char *stnID, Decoded_METAR *Mptr, int *NDEX)
  
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isCodeName                                       */
@@ -2058,7 +2058,7 @@ static MDSP_BOOL isStnId( char *stnID, Decoded_METAR *Mptr, int *NDEX)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isCodeName( char *codename, Decoded_METAR *Mptr, int *NDEX)
 {
@@ -2078,9 +2078,9 @@ static MDSP_BOOL isCodeName( char *codename, Decoded_METAR *Mptr, int *NDEX)
 }
  
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isNIL                                            */
@@ -2102,7 +2102,7 @@ static MDSP_BOOL isCodeName( char *codename, Decoded_METAR *Mptr, int *NDEX)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isNIL( char *token, Decoded_METAR *Mptr, int *NDEX)
 {
@@ -2121,9 +2121,9 @@ static MDSP_BOOL isNIL( char *token, Decoded_METAR *Mptr, int *NDEX)
  
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isAUTO                                           */
@@ -2145,7 +2145,7 @@ static MDSP_BOOL isNIL( char *token, Decoded_METAR *Mptr, int *NDEX)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isAUTO( char *token, Decoded_METAR *Mptr, int *NDEX)
 {
@@ -2164,9 +2164,9 @@ static MDSP_BOOL isAUTO( char *token, Decoded_METAR *Mptr, int *NDEX)
  
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isCOR                                            */
@@ -2188,7 +2188,7 @@ static MDSP_BOOL isAUTO( char *token, Decoded_METAR *Mptr, int *NDEX)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isCOR ( char *token, Decoded_METAR *Mptr, int *NDEX)
 {
@@ -2207,9 +2207,9 @@ static MDSP_BOOL isCOR ( char *token, Decoded_METAR *Mptr, int *NDEX)
  
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isTimeUTC                                        */
@@ -2231,7 +2231,7 @@ static MDSP_BOOL isCOR ( char *token, Decoded_METAR *Mptr, int *NDEX)
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isTimeUTC( char *UTC, Decoded_METAR *Mptr, int *NDEX )
 {
@@ -2285,9 +2285,9 @@ static MDSP_BOOL isTimeUTC( char *UTC, Decoded_METAR *Mptr, int *NDEX )
       return FALSE;
 }
 
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         defaultWindUnitsForAirport                       */
@@ -2309,7 +2309,7 @@ static MDSP_BOOL isTimeUTC( char *UTC, Decoded_METAR *Mptr, int *NDEX )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
 
 static char* defaultWindUnitsForAirport( char *airportId )
 {
@@ -2342,9 +2342,9 @@ static char* defaultWindUnitsForAirport( char *airportId )
    return "KT";
 }
  
-//#pragma subtitle(" ")
-//#pragma page(1)
-//#pragma subtitle("subtitle - description                       ")
+// #pragma subtitle(" ")
+// #pragma page(1)
+// #pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         isWindData                                       */
@@ -2366,7 +2366,7 @@ static char* defaultWindUnitsForAirport( char *airportId )
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
 static MDSP_BOOL isWindData( char *wind, Decoded_METAR *Mptr, int *NDEX )
 {
@@ -2521,9 +2521,9 @@ printf("isWindData:  Passed dddff(f) test - wind = %s\n",wind);
  
 }
 
-//#pragma page(1)
-//#pragma subtitle(" ")
-//#pragma subtitle("subtitle - Decode METAR report.              ")
+// #pragma page(1)
+// #pragma subtitle(" ")
+// #pragma subtitle("subtitle - Decode METAR report.              ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         decode_metar                                         */
@@ -2549,7 +2549,7 @@ printf("isWindData:  Passed dddff(f) test - wind = %s\n",wind);
 /*                     so const char *'s could be passed in.        */
 /*                                                                  */
 /********************************************************************/
-//#pragma page(1)
+// #pragma page(1)
  
  
 int decode_metar( char *string , Decoded_METAR *Mptr )
