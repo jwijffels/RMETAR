@@ -117,7 +117,12 @@ List r_decode_metar_(std::string metarcode) {
  
   // Rcpp::Rcout << "The value of SKY_2ndSite_LOC is : " << Mptr->SKY_2ndSite_LOC << std::endl;
     
-  z = ListBuilder()
+  z = ListBuilder();
+    
+    
+    // compute character values ------------------------------------------------
+    
+  z
     .add("synoptic_cloud_type", string_or_na(Mptr->synoptic_cloud_type))
     .add("snow_depth_group",    string_or_na(Mptr->snow_depth_group))
     .add("codeName",            string_or_na(Mptr->codeName))
@@ -173,8 +178,96 @@ List r_decode_metar_(std::string metarcode) {
   
   .add("METAR", Rf_mkString(invec));
   
+  // Compute boolean values ----------------------------------------------------
   
-  // Decode printed string using sprint_metar()
+  z
+    .add("Indeterminant3_6HrPrecip", LogicalVector::create(Mptr->Indeterminant3_6HrPrecip))
+    .add("Indeterminant_24HrPrecip", LogicalVector::create(Mptr->Indeterminant_24HrPrecip))
+    .add("CIGNO",                    LogicalVector::create(Mptr->CIGNO))
+    .add("SLPNO",                    LogicalVector::create(Mptr->SLPNO))
+    .add("ACFTMSHP",                 LogicalVector::create(Mptr->ACFTMSHP))
+    .add("NOSPECI",                  LogicalVector::create(Mptr->NOSPECI))
+    .add("FIRST",                    LogicalVector::create(Mptr->FIRST))
+    .add("LAST",                     LogicalVector::create(Mptr->LAST))
+    .add("SunSensorOut",             LogicalVector::create(Mptr->SunSensorOut))
+    .add("AUTO",                     LogicalVector::create(Mptr->AUTO))
+    .add("COR",                      LogicalVector::create(Mptr->COR))
+    .add("NIL_rpt",                  LogicalVector::create(Mptr->NIL_rpt))
+    .add("CAVOK",                    LogicalVector::create(Mptr->CAVOK))
+    .add("RVRNO",                    LogicalVector::create(Mptr->RVRNO))
+    .add("A_altstng",                LogicalVector::create(Mptr->A_altstng))
+    .add("Q_altstng",                LogicalVector::create(Mptr->Q_altstng))
+    .add("VIRGA",                    LogicalVector::create(Mptr->VIRGA))
+    .add("VOLCASH",                  LogicalVector::create(Mptr->VOLCASH))
+    .add("GR",                       LogicalVector::create(Mptr->GR))
+    .add("CHINO",                    LogicalVector::create(Mptr->CHINO))
+    .add("VISNO",                    LogicalVector::create(Mptr->VISNO))
+    .add("PNO",                      LogicalVector::create(Mptr->PNO))
+    .add("PWINO",                    LogicalVector::create(Mptr->PWINO))
+    .add("FZRANO",                   LogicalVector::create(Mptr->FZRANO))
+    .add("TSNO",                     LogicalVector::create(Mptr->TSNO))
+    .add("DollarSign",               LogicalVector::create(Mptr->DollarSign))
+    .add("PRESRR",                   LogicalVector::create(Mptr->PRESRR))
+    .add("PRESFR",                   LogicalVector::create(Mptr->PRESFR))
+    .add("Wshft_FROPA",              LogicalVector::create(Mptr->Wshft_FROPA))
+    .add("OCNL_LTG",                 LogicalVector::create(Mptr->OCNL_LTG))
+    .add("FRQ_LTG",                  LogicalVector::create(Mptr->FRQ_LTG))
+    .add("CNS_LTG",                  LogicalVector::create(Mptr->CNS_LTG))
+    .add("CG_LTG",                   LogicalVector::create(Mptr->CG_LTG))
+    .add("IC_LTG",                   LogicalVector::create(Mptr->IC_LTG))
+    .add("CC_LTG",                   LogicalVector::create(Mptr->CC_LTG))
+    .add("CA_LTG",                   LogicalVector::create(Mptr->CA_LTG))
+    .add("DSNT_LTG",                 LogicalVector::create(Mptr->DSNT_LTG))
+    .add("AP_LTG",                   LogicalVector::create(Mptr->AP_LTG))
+    .add("VcyStn_LTG",               LogicalVector::create(Mptr->VcyStn_LTG))
+    .add("OVHD_LTG",                 LogicalVector::create(Mptr->OVHD_LTG))
+    .add("LightningVCTS",            LogicalVector::create(Mptr->LightningVCTS))
+    .add("LightningTS",              LogicalVector::create(Mptr->LightningTS))
+    .add("visibilityIsUpperBound",  LogicalVector::create(Mptr->visibilityIsUpperBound));
+  
+  // Compute integer values ----------------------------------------------------
+
+  z
+    .add("TornadicDistance",   IntegerVector::create(int(Mptr->TornadicDistance)))
+    .add("ob_hour",            IntegerVector::create(Mptr->ob_hour))
+    .add("ob_minute",          IntegerVector::create(Mptr->ob_minute))
+    .add("ob_date",            IntegerVector::create(Mptr->ob_date))
+    .add("minWnDir",           IntegerVector::create(Mptr->minWnDir))
+    .add("maxWnDir",           IntegerVector::create(Mptr->maxWnDir))
+    .add("VertVsby",           IntegerVector::create(Mptr->VertVsby))
+    .add("temp",               IntegerVector::create(Mptr->temp))
+    .add("dew_pt_temp",        IntegerVector::create(Mptr->dew_pt_temp))
+    .add("QFE",                IntegerVector::create(Mptr->QFE))
+    .add("hectoPasc_altstng",  IntegerVector::create(Mptr->hectoPasc_altstng))
+    .add("char_prestndcy",     IntegerVector::create(Mptr->char_prestndcy))
+    .add("minCeiling",         IntegerVector::create(Mptr->minCeiling))
+    .add("maxCeiling",         IntegerVector::create(Mptr->maxCeiling))
+    .add("WshfTime_hour",      IntegerVector::create(Mptr->WshfTime_hour))
+    .add("WshfTime_minute",    IntegerVector::create(Mptr->WshfTime_minute))
+    .add("min_vrbl_wind_dir",  IntegerVector::create(Mptr->min_vrbl_wind_dir))
+    .add("max_vrbl_wind_dir",  IntegerVector::create(Mptr->max_vrbl_wind_dir))
+    .add("PKWND_dir",          IntegerVector::create(Mptr->PKWND_dir))
+    .add("PKWND_speed",        IntegerVector::create(Mptr->PKWND_speed))
+    .add("PKWND_hour",         IntegerVector::create(Mptr->PKWND_hour))
+    .add("PKWND_minute",       IntegerVector::create(Mptr->PKWND_minute))
+    .add("SKY_2ndSite_Meters", IntegerVector::create(Mptr->SKY_2ndSite_Meters))
+    .add("Ceiling",            IntegerVector::create(Mptr->Ceiling))
+    .add("Estimated_Ceiling",  IntegerVector::create(Mptr->Estimated_Ceiling))
+    .add("SNINCR",             IntegerVector::create(Mptr->SNINCR))
+    .add("SNINCR_TotalDepth",  IntegerVector::create(Mptr->SNINCR_TotalDepth))
+    .add("SunshineDur",        IntegerVector::create(Mptr->SunshineDur))
+    .add("ObscurAloftHgt",     IntegerVector::create(Mptr->ObscurAloftHgt))
+    .add("VrbSkyLayerHgt",     IntegerVector::create(Mptr->VrbSkyLayerHgt))
+    .add("Num8thsSkyObscured", IntegerVector::create(Mptr->Num8thsSkyObscured))
+    .add("CIG_2ndSite_Meters", IntegerVector::create(Mptr->CIG_2ndSite_Meters))
+    .add("snow_depth",         IntegerVector::create(Mptr->snow_depth))
+    .add("BTornadicHour",      IntegerVector::create(Mptr->BTornadicHour))
+    .add("BTornadicMinute",    IntegerVector::create(Mptr->BTornadicMinute))
+    .add("ETornadicHour",      IntegerVector::create(Mptr->ETornadicHour))
+    .add("ETornadicMinute",    IntegerVector::create(Mptr->ETornadicMinute));
+  
+  
+  // Decode printed string using sprint_metar() --------------------------------
   char printout[5000];
   sprint_metar(printout, Mptr);
   z.add("printout", Rf_mkString(printout));
