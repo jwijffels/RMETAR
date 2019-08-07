@@ -255,6 +255,10 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
     .add("Recent_Wx_2", r_extract_recent_wx_(Mptr, 2));
   
   // Add wind                  ---------------------------------------------------
+  
+  z
+    .add("windstruct", r_extract_wind_(Mptr));
+  
   // Add cloud condition       ---------------------------------------------------
   
   z

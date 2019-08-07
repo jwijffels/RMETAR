@@ -21,7 +21,9 @@ Rcpp::NumericVector numeric_vector(float x);
 Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element);
 Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr);
 Rcpp::List r_extract_recent_wx_(Decoded_METAR *Mptr, int element);
+Rcpp::List r_extract_wind_(Decoded_METAR *Mptr);
 Rcpp::List r_extract_cloud_conditions_(Decoded_METAR *Mptr, int element);
+
 
 
 class ListBuilder {

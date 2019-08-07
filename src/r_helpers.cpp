@@ -137,3 +137,13 @@ Rcpp::List r_extract_cloud_conditions_(Decoded_METAR *Mptr, int element) {
     Rcpp::Named("cloud_hgt_meters") = integer_vector(Mptr->cloudGroup[element].cloud_hgt_meters));
   return output;
 }
+
+Rcpp::List r_extract_wind_(Decoded_METAR *Mptr) {
+  Rcpp::List output = Rcpp::List::create(
+    Rcpp::Named("windUnits")  = string_or_na(Mptr->winData.windUnits),
+    Rcpp::Named("windVRB")    = logical_vector(Mptr->winData.windVRB), 
+    Rcpp::Named("windDir")    = integer_vector(Mptr->winData.windDir), 
+    Rcpp::Named("windSpeed")  = integer_vector(Mptr->winData.windSpeed), 
+    Rcpp::Named("windGust")   = integer_vector(Mptr->winData.windGust));
+  return output;
+}
