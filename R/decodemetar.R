@@ -15,7 +15,7 @@ decodemetar <- function(x, printdecodedmetar = FALSE){
   result <- r_decode_metar_(x)
   class(result) <- c("decodedMETAR", class(result))
   if(printdecodedmetar){
-    cat(result$printout.mdsplib)
+    cat(result$printout)
     invisible(result)
   } else {
     result
