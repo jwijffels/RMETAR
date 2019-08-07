@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #ifndef METARX
 #define METARX
 
-#include "../include/metar.h"
+#include "metar.h"
 
 #include "local.h"     /* standard header file */
 

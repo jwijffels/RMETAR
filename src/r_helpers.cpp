@@ -7,7 +7,7 @@ extern "C" {
 #define R_NO_REMAP
 #include <R.h>
 #include <Rinternals.h>
-#include "../include/metar.h"
+#include "metar.h"
   
 } // end extern "C"
 
