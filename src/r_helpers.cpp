@@ -97,17 +97,16 @@ Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
       Distance_Unit = "meters";
   };
   Rcpp::List output = Rcpp::List::create(
-    Rcpp::Named("runway_designator") = string_or_na(Mptr->RRVR[element].runway_designator),
-    Rcpp::Named("vrbl_visRange") = logical_vector(Mptr->RRVR[element].vrbl_visRange), 
-    Rcpp::Named("below_min_RVR") = logical_vector(Mptr->RRVR[element].below_min_RVR), 
-    Rcpp::Named("above_max_RVR") = logical_vector(Mptr->RRVR[element].above_max_RVR), 
-    Rcpp::Named("visRange") = integer_vector(Mptr->RRVR[element].visRange), 
-    Rcpp::Named("Max_visRange") = integer_vector(Mptr->RRVR[element].Max_visRange),
-    Rcpp::Named("Min_visRange") = integer_vector(Mptr->RRVR[element].Min_visRange), 
-    Rcpp::Named("Distance_Unit") = Distance_Unit);
+    Rcpp::Named("runway_designator")  = string_or_na(Mptr->RRVR[element].runway_designator),
+    Rcpp::Named("vrbl_visRange")      = logical_vector(Mptr->RRVR[element].vrbl_visRange), 
+    Rcpp::Named("below_min_RVR")      = logical_vector(Mptr->RRVR[element].below_min_RVR), 
+    Rcpp::Named("above_max_RVR")      = logical_vector(Mptr->RRVR[element].above_max_RVR), 
+    Rcpp::Named("visRange")           = integer_vector(Mptr->RRVR[element].visRange), 
+    Rcpp::Named("Max_visRange")       = integer_vector(Mptr->RRVR[element].Max_visRange),
+    Rcpp::Named("Min_visRange")       = integer_vector(Mptr->RRVR[element].Min_visRange), 
+    Rcpp::Named("Distance_Unit")      = Distance_Unit);
   return output;
 }
-
 
 Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr) {
   Rcpp::List output = Rcpp::List::create(
@@ -117,5 +116,16 @@ Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr) {
     Rcpp::Named("visRange")       = integer_vector(Mptr->DVR.visRange), 
     Rcpp::Named("Max_visRange")   = integer_vector(Mptr->DVR.Max_visRange),
     Rcpp::Named("Min_visRange")   = integer_vector(Mptr->DVR.Min_visRange));
+  return output;
+}
+
+
+Rcpp::List r_extract_recent_wx_(Decoded_METAR *Mptr, int element) {
+  Rcpp::List output = Rcpp::List::create(
+    Rcpp::Named("Recent_weather") = string_or_na(Mptr->ReWx[element].Recent_weather),
+    Rcpp::Named("Bhh")            = integer_vector(Mptr->ReWx[element].Bhh), 
+    Rcpp::Named("Bmm")            = integer_vector(Mptr->ReWx[element].Bmm), 
+    Rcpp::Named("Ehh")            = integer_vector(Mptr->ReWx[element].Ehh), 
+    Rcpp::Named("Emm")            = integer_vector(Mptr->ReWx[element].Emm));
   return output;
 }

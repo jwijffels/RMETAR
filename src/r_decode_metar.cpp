@@ -246,11 +246,16 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   
   z
     .add("Dispatch_VisRange", r_extract_dispatch_visrange_(Mptr));
+
+  // Add recent_wx             ---------------------------------------------------  
+
+  z
+    .add("Recent_Wx_0", r_extract_recent_wx_(Mptr, 0))
+    .add("Recent_Wx_1", r_extract_recent_wx_(Mptr, 1))
+    .add("Recent_Wx_2", r_extract_recent_wx_(Mptr, 2));
   
-  // Add cloud condition       ---------------------------------------------------
   // Add wind                  ---------------------------------------------------
-  // Add recent_wx             ---------------------------------------------------
-  
+  // Add cloud condition       ---------------------------------------------------
 
   return z.convert_to_dataframe();
 }
