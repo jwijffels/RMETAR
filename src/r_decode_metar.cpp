@@ -16,54 +16,6 @@ extern "C" {
 #include "r_helpers.h"
 
 
-// Workaround for Rcpp limit of max 20 elements in list
-// https://stackoverflow.com/a/27371771/602276
-class ListBuilder {
-  
-public:
-  
-  ListBuilder() {};
-  ~ListBuilder() {};
-  
-  inline ListBuilder& add(std::string const& name, SEXP x) {
-    names.push_back(name);
-    
-    // NOTE: we need to protect the SEXPs we pass in; there is
-    // probably a nicer way to handle this but ...
-    elements.push_back(PROTECT(x));
-    
-    return *this;
-  }
-  
-  inline operator List() const {
-    List result(elements.size());
-    for (size_t i = 0; i < elements.size(); ++i) {
-      result[i] = elements[i];
-    }
-    result.attr("names") = wrap(names);
-    UNPROTECT(elements.size());
-    return result;
-  }
-  
-  inline operator DataFrame() const {
-    List result = static_cast<List>(*this);
-    result.attr("class") = "data.frame";
-    result.attr("row.names") = IntegerVector::create(NA_INTEGER, XLENGTH(elements[0]));
-    return result;
-  }
-  
-private:
-  
-  std::vector<std::string> names;
-  std::vector<SEXP> elements;
-  
-  ListBuilder(ListBuilder const&) {}; // not safe to copy
-  
-};
-
-// -----------------------------------------------------------------------------
-
-
 
 // [[Rcpp::export]]
 Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
@@ -237,22 +189,22 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   // Compute numeric values ----------------------------------------------------
   
   z
-    .add("SectorVsby", numeric_vector(Mptr->SectorVsby))
+    .add("SectorVsby",     numeric_vector(Mptr->SectorVsby))
     .add("WaterEquivSnow", numeric_vector(Mptr->WaterEquivSnow))
-    .add("VSBY_2ndSite", numeric_vector(Mptr->VSBY_2ndSite))
+    .add("VSBY_2ndSite",   numeric_vector(Mptr->VSBY_2ndSite))
     .add("prevail_vsbySM", numeric_vector(Mptr->prevail_vsbySM))
-    .add("prevail_vsbyM", numeric_vector(Mptr->prevail_vsbyM))
+    .add("prevail_vsbyM",  numeric_vector(Mptr->prevail_vsbyM))
     .add("prevail_vsbyKM", numeric_vector(Mptr->prevail_vsbyKM))
-    .add("prestndcy", numeric_vector(Mptr->prestndcy))
-    .add("precip_amt", numeric_vector(Mptr->precip_amt))
-    .add("precip_24_amt", numeric_vector(Mptr->precip_24_amt))
-    .add("maxtemp", numeric_vector(Mptr->maxtemp))
-    .add("mintemp", numeric_vector(Mptr->mintemp))
-    .add("max24temp", numeric_vector(Mptr->max24temp))
-    .add("min24temp", numeric_vector(Mptr->min24temp))
-    .add("minVsby", numeric_vector(Mptr->minVsby))
-    .add("maxVsby", numeric_vector(Mptr->maxVsby))
-    .add("hourlyPrecip", numeric_vector(Mptr->hourlyPrecip))
+    .add("prestndcy",      numeric_vector(Mptr->prestndcy))
+    .add("precip_amt",     numeric_vector(Mptr->precip_amt))
+    .add("precip_24_amt",  numeric_vector(Mptr->precip_24_amt))
+    .add("maxtemp",        numeric_vector(Mptr->maxtemp))
+    .add("mintemp",        numeric_vector(Mptr->mintemp))
+    .add("max24temp",      numeric_vector(Mptr->max24temp))
+    .add("min24temp",      numeric_vector(Mptr->min24temp))
+    .add("minVsby",        numeric_vector(Mptr->minVsby))
+    .add("maxVsby",        numeric_vector(Mptr->maxVsby))
+    .add("hourlyPrecip",   numeric_vector(Mptr->hourlyPrecip))
     .add("TWR_VSBY", numeric_vector(Mptr->TWR_VSBY))
     .add("SFC_VSBY", numeric_vector(Mptr->SFC_VSBY))
     .add("Temp_2_tenths", numeric_vector(Mptr->Temp_2_tenths))
@@ -273,8 +225,13 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   z
     .add("METAR", Rf_mkString(invec))
     .add("printout", Rf_mkString(printout));
+  
+  // Add runway visual range ---------------------------------------------------
+  
+  // z
+  //   .add("result_Runway_VisRange_0", r_extract_runway_visrange_(Mptr, 0));
     
   
   
-  return z;
+  return z.convert_to_dataframe();
 }

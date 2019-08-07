@@ -11,6 +11,38 @@ extern "C" {
 } // end extern "C"
 
 
+// Workaround for Rcpp limit of max 20 elements in list
+// https://stackoverflow.com/a/27371771/602276
+
+  ListBuilder& ListBuilder::add(std::string const& name, SEXP x) {
+    names.push_back(name);
+    
+    // NOTE: we need to protect the SEXPs we pass in; there is
+    // probably a nicer way to handle this but ...
+    elements.push_back(PROTECT(x));
+    
+    return *this;
+  }
+  
+  Rcpp::List ListBuilder::convert_to_list() const {
+    List result(elements.size());
+    for (size_t i = 0; i < elements.size(); ++i) {
+      result[i] = elements[i];
+    }
+    result.attr("names") = wrap(names);
+    UNPROTECT(elements.size());
+    return result;
+  }
+  
+  Rcpp::DataFrame ListBuilder::convert_to_dataframe() const {
+    List result = convert_to_list();
+    result.attr("class") = "data.frame";
+    result.attr("row.names") = IntegerVector::create(NA_INTEGER, XLENGTH(elements[0]));
+    return result;
+  }
+  
+
+
 Rcpp::CharacterVector string_or_na(char* x) {
   if(x[0] == '\0') return CharacterVector::create(NA_STRING);
   if (strlen(x)) {
@@ -54,3 +86,22 @@ Rcpp::NumericVector numeric_vector(float x){
   }
 }
 
+// -----------------------------------------------------------------------------
+
+
+// Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
+//   ListBuilder z;
+//   z = ListBuilder()
+//     .add("runway_designator", string_or_na(Mptr->RRVR[element].runway_designator));
+//   
+//   // char runway_designator[6];
+//   // MDSP_BOOL vrbl_visRange;
+//   // MDSP_BOOL below_min_RVR;
+//   // MDSP_BOOL above_max_RVR;
+//   // int  visRange;
+//   // int  Max_visRange;
+//   // int  Min_visRange;
+//   // Distance_Unit distance_unit;
+//   
+//   return z;
+// }

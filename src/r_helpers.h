@@ -17,4 +17,28 @@ Rcpp::LogicalVector logical_vector(MDSP_BOOL x);
 Rcpp::IntegerVector integer_vector(int x);
 Rcpp::NumericVector numeric_vector(float x);
 
+
+Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element);
+
+
+class ListBuilder {
+  
+public:
+  
+  ListBuilder() {};
+  ~ListBuilder() {};
+  
+  ListBuilder& add(std::string const& name, SEXP x);
+  Rcpp::List convert_to_list() const;
+  Rcpp::DataFrame convert_to_dataframe() const;
+
+  private:
+  
+  std::vector<std::string> names;
+  std::vector<SEXP> elements;
+  
+  ListBuilder(ListBuilder const&) {}; // not safe to copy
+};
+
+
 #endif
