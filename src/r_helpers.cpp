@@ -119,24 +119,3 @@ Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr) {
     Rcpp::Named("Min_visRange")   = integer_vector(Mptr->DVR.Min_visRange));
   return output;
 }
-
-
-// -----------------------------------------------------------------------------
-
-
-// Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
-//   ListBuilder z;
-//   z = ListBuilder()
-//     .add("runway_designator", string_or_na(Mptr->RRVR[element].runway_designator));
-//   
-//   // char runway_designator[6];
-//   // MDSP_BOOL vrbl_visRange;
-//   // MDSP_BOOL below_min_RVR;
-//   // MDSP_BOOL above_max_RVR;
-//   // int  visRange;
-//   // int  Max_visRange;
-//   // int  Min_visRange;
-//   // Distance_Unit distance_unit;
-//   
-//   return z;
-// }
