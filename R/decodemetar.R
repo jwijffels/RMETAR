@@ -8,7 +8,7 @@
 #' The list contains data of a similar structure as the decoded_METAR structure
 #' in /src/metar.h. See the examples.
 #' @export
-#' @examples inst/examples/example_decodemetar.R
+#' @example inst/examples/example_decodemetar.R
 decodemetar <- function(x, printdecodedmetar = FALSE){
   x <- as.character(x)
   printdecodedmetar <- as.logical(printdecodedmetar)
