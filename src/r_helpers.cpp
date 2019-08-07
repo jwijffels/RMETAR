@@ -1,5 +1,6 @@
 #include "r_helpers.h"
 #include <Rcpp.h>
+#include "metar_structs.h" 
 using namespace Rcpp;
 
 extern "C" {
@@ -71,7 +72,7 @@ Rcpp::LogicalVector logical_vector(MDSP_BOOL x){
 }
 
 Rcpp::IntegerVector integer_vector(int x){
-  if (x == 2147483647) {
+  if (x == MAXINT ) {
     return IntegerVector::create(NA_INTEGER);
   } else {
     return IntegerVector::create(x);
@@ -79,12 +80,35 @@ Rcpp::IntegerVector integer_vector(int x){
 }
 
 Rcpp::NumericVector numeric_vector(float x){
-  if (x == 2147483648) {
+  if (x == ((float) MAXINT)) {
     return NumericVector::create(NA_REAL);
   } else {
     return NumericVector::create(x);
   }
 }
+
+
+Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
+  Rcpp::CharacterVector Distance_Unit;
+  switch(Mptr->RRVR[element].distance_unit) {
+    case DIST_FEET:
+      Distance_Unit = "feet";
+    case DIST_METERS:
+      Distance_Unit = "meters";
+  };
+  Rcpp::List output = Rcpp::List::create(
+    Rcpp::Named("runway_designator") = string_or_na(Mptr->RRVR[element].runway_designator),
+    Rcpp::Named("vrbl_visRange") = logical_vector(Mptr->RRVR[element].vrbl_visRange), 
+    Rcpp::Named("below_min_RVR") = logical_vector(Mptr->RRVR[element].below_min_RVR), 
+    Rcpp::Named("above_max_RVR") = logical_vector(Mptr->RRVR[element].above_max_RVR), 
+    Rcpp::Named("visRange") = integer_vector(Mptr->RRVR[element].visRange), 
+    Rcpp::Named("Max_visRange") = integer_vector(Mptr->RRVR[element].Max_visRange),
+    Rcpp::Named("Min_visRange") = integer_vector(Mptr->RRVR[element].Min_visRange), 
+    Rcpp::Named("Distance_Unit") = Distance_Unit);
+  return output;
+}
+
+
 
 // -----------------------------------------------------------------------------
 
