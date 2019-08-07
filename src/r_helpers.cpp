@@ -89,19 +89,20 @@ Rcpp::NumericVector numeric_vector(float x){
 // -----------------------------------------------------------------------------
 
 
-// Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
-//   ListBuilder z;
-//   z = ListBuilder()
-//     .add("runway_designator", string_or_na(Mptr->RRVR[element].runway_designator));
-//   
-//   // char runway_designator[6];
-//   // MDSP_BOOL vrbl_visRange;
-//   // MDSP_BOOL below_min_RVR;
-//   // MDSP_BOOL above_max_RVR;
-//   // int  visRange;
-//   // int  Max_visRange;
-//   // int  Min_visRange;
-//   // Distance_Unit distance_unit;
-//   
-//   return z;
-// }
+Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
+  Rcpp::List z;
+  z = List::create(
+    Named("runway_designator", string_or_na  (Mptr->RRVR[element].runway_designator)),
+    Named("vrbl_visRange",     logical_vector(Mptr->RRVR[element].vrbl_visRange)),
+    Named("below_min_RVR",     logical_vector(Mptr->RRVR[element].below_min_RVR)),
+    Named("above_max_RVR",     logical_vector(Mptr->RRVR[element].above_max_RVR)),
+    Named("visRange",          integer_vector(Mptr->RRVR[element].visRange)),
+    Named("Max_visRange",      integer_vector(Mptr->RRVR[element].Max_visRange)),
+    Named("Min_visRange",      integer_vector(Mptr->RRVR[element].Min_visRange))
+  );
+    // .add("distance_unit ",    (Mptr->RRVR[element].distance_unit));
+
+    // Distance_Unit distance_unit;
+
+  return z;
+}
