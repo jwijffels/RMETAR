@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // r_decode_metar_
-List r_decode_metar_(std::string metarcode);
+Rcpp::DataFrame r_decode_metar_(std::string metarcode);
 RcppExport SEXP _RMETAR_r_decode_metar_(SEXP metarcodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
