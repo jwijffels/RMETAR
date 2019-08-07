@@ -109,6 +109,17 @@ Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
 }
 
 
+Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr) {
+  Rcpp::List output = Rcpp::List::create(
+    Rcpp::Named("vrbl_visRange")  = logical_vector(Mptr->DVR.vrbl_visRange),
+    Rcpp::Named("below_min_DVR")  = logical_vector(Mptr->DVR.below_min_DVR), 
+    Rcpp::Named("above_max_DVR")  = logical_vector(Mptr->DVR.above_max_DVR), 
+    Rcpp::Named("visRange")       = integer_vector(Mptr->DVR.visRange), 
+    Rcpp::Named("Max_visRange")   = integer_vector(Mptr->DVR.Max_visRange),
+    Rcpp::Named("Min_visRange")   = integer_vector(Mptr->DVR.Min_visRange));
+  return output;
+}
+
 
 // -----------------------------------------------------------------------------
 

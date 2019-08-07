@@ -229,20 +229,28 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   // Add runway visual range ---------------------------------------------------
   
   z
-     .add("result_Runway_VisRange_0", r_extract_runway_visrange_(Mptr, 0))
-     .add("result_Runway_VisRange_1", r_extract_runway_visrange_(Mptr, 1))
-     .add("result_Runway_VisRange_2", r_extract_runway_visrange_(Mptr, 2))
-     .add("result_Runway_VisRange_3", r_extract_runway_visrange_(Mptr, 3))
-     .add("result_Runway_VisRange_4", r_extract_runway_visrange_(Mptr, 4))
-     .add("result_Runway_VisRange_5", r_extract_runway_visrange_(Mptr, 5))
-     .add("result_Runway_VisRange_6", r_extract_runway_visrange_(Mptr, 6))
-     .add("result_Runway_VisRange_7", r_extract_runway_visrange_(Mptr, 7))
-     .add("result_Runway_VisRange_8", r_extract_runway_visrange_(Mptr, 8))
-     .add("result_Runway_VisRange_9", r_extract_runway_visrange_(Mptr, 9))
-     .add("result_Runway_VisRange_10", r_extract_runway_visrange_(Mptr, 10))
-     .add("result_Runway_VisRange_11", r_extract_runway_visrange_(Mptr, 11));
+     .add("Runway_VisRange_0", r_extract_runway_visrange_(Mptr, 0))
+     .add("Runway_VisRange_1", r_extract_runway_visrange_(Mptr, 1))
+     .add("Runway_VisRange_2", r_extract_runway_visrange_(Mptr, 2))
+     .add("Runway_VisRange_3", r_extract_runway_visrange_(Mptr, 3))
+     .add("Runway_VisRange_4", r_extract_runway_visrange_(Mptr, 4))
+     .add("Runway_VisRange_5", r_extract_runway_visrange_(Mptr, 5))
+     .add("Runway_VisRange_6", r_extract_runway_visrange_(Mptr, 6))
+     .add("Runway_VisRange_7", r_extract_runway_visrange_(Mptr, 7))
+     .add("Runway_VisRange_8", r_extract_runway_visrange_(Mptr, 8))
+     .add("Runway_VisRange_9", r_extract_runway_visrange_(Mptr, 9))
+     .add("Runway_VisRange_10", r_extract_runway_visrange_(Mptr, 10))
+     .add("Runway_VisRange_11", r_extract_runway_visrange_(Mptr, 11));
 
+  // Add dispatch visual range ---------------------------------------------------
   
+  z
+    .add("Dispatch_VisRange", r_extract_dispatch_visrange_(Mptr));
   
+  // Add cloud condition       ---------------------------------------------------
+  // Add wind                  ---------------------------------------------------
+  // Add recent_wx             ---------------------------------------------------
+  
+
   return z.convert_to_dataframe();
 }
