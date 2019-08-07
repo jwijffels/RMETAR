@@ -256,6 +256,14 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   
   // Add wind                  ---------------------------------------------------
   // Add cloud condition       ---------------------------------------------------
-
+  
+  z
+    .add("Cloud_Conditions_0", r_extract_cloud_conditions_(Mptr, 0))
+    .add("Cloud_Conditions_1", r_extract_cloud_conditions_(Mptr, 1))
+    .add("Cloud_Conditions_2", r_extract_cloud_conditions_(Mptr, 2))
+    .add("Cloud_Conditions_3", r_extract_cloud_conditions_(Mptr, 3))
+    .add("Cloud_Conditions_4", r_extract_cloud_conditions_(Mptr, 4))
+    .add("Cloud_Conditions_5", r_extract_cloud_conditions_(Mptr, 5));
+  
   return z.convert_to_dataframe();
 }

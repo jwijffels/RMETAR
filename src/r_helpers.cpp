@@ -119,7 +119,6 @@ Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr) {
   return output;
 }
 
-
 Rcpp::List r_extract_recent_wx_(Decoded_METAR *Mptr, int element) {
   Rcpp::List output = Rcpp::List::create(
     Rcpp::Named("Recent_weather") = string_or_na(Mptr->ReWx[element].Recent_weather),
@@ -127,5 +126,14 @@ Rcpp::List r_extract_recent_wx_(Decoded_METAR *Mptr, int element) {
     Rcpp::Named("Bmm")            = integer_vector(Mptr->ReWx[element].Bmm), 
     Rcpp::Named("Ehh")            = integer_vector(Mptr->ReWx[element].Ehh), 
     Rcpp::Named("Emm")            = integer_vector(Mptr->ReWx[element].Emm));
+  return output;
+}
+
+Rcpp::List r_extract_cloud_conditions_(Decoded_METAR *Mptr, int element) {
+  Rcpp::List output = Rcpp::List::create(
+    Rcpp::Named("cloud_type")       = string_or_na(Mptr->cloudGroup[element].cloud_type),
+    Rcpp::Named("cloud_hgt_char")   = string_or_na(Mptr->cloudGroup[element].cloud_hgt_char), 
+    Rcpp::Named("other_cld_phenom") = string_or_na(Mptr->cloudGroup[element].other_cld_phenom), 
+    Rcpp::Named("cloud_hgt_meters") = integer_vector(Mptr->cloudGroup[element].cloud_hgt_meters));
   return output;
 }
