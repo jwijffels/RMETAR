@@ -16,12 +16,13 @@ a data.frame with columns time and metar containing the METARS from the selected
 Retrieve hourly cycles of METAR data from \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}
 }
 \examples{
+x <- download_current_metar_cycle(hour = 12)
+\dontrun{
 x <- download_current_metar_cycle(hour = 0)
 x <- download_current_metar_cycle(hour = 7)
 x <- download_current_metar_cycle(hour = 12)
 x <- download_current_metar_cycle(hour = 16)
 x <- download_current_metar_cycle(hour = 23)
-\dontrun{
 x <- lapply(0:23, download_current_metar_cycle)
 }
 }
