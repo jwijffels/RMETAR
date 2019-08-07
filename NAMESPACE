@@ -2,7 +2,7 @@
 
 export(decodemetar)
 export(download_airports)
-export(download_current_metar_cycle)
+export(download_metar)
 importFrom(Rcpp,sourceCpp)
 importFrom(fasttime,fastPOSIXct)
 importFrom(utils,read.csv)

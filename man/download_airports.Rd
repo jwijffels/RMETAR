@@ -7,7 +7,7 @@
 download_airports()
 }
 \value{
-a data.frame with columns id, continent, country, country_name, region, region_name, municipality, name, type, latitude, longitude, elevation, gps, iata, local_code, link, link_wikipedia
+a data.frame with columns id, continent, country, country_name, region, region_name, municipality, name, type, latitude (in degrees), longitude (in degrees), elevation (in feet), gps, iata, local_code, link, link_wikipedia
 }
 \description{
 Fetch a list of airports from \url{http://ourairports.com/data}. This data is Public Domain.

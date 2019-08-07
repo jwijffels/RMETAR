@@ -6,16 +6,16 @@
 #' @return a data.frame with columns time and metar containing the METARS from the selected hour currently at \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}
 #' @export
 #' @examples 
-#' x <- download_current_metar_cycle(hour = 12)
+#' x <- download_metar(hour = 12)
 #' \dontrun{
-#' x <- download_current_metar_cycle(hour = 0)
-#' x <- download_current_metar_cycle(hour = 7)
-#' x <- download_current_metar_cycle(hour = 12)
-#' x <- download_current_metar_cycle(hour = 16)
-#' x <- download_current_metar_cycle(hour = 23)
-#' x <- lapply(0:23, download_current_metar_cycle)
+#' x <- download_metar(hour = 0)
+#' x <- download_metar(hour = 7)
+#' x <- download_metar(hour = 12)
+#' x <- download_metar(hour = 16)
+#' x <- download_metar(hour = 23)
+#' x <- lapply(0:23, download_metar)
 #' }
-download_current_metar_cycle <- function(hour){
+download_metar <- function(hour){
   ftpurl <- "https://tgftp.nws.noaa.gov/data/observations/metar/cycles"
   url <- sprintf("%s/%02dZ.TXT", ftpurl, hour)
   
@@ -33,7 +33,7 @@ download_current_metar_cycle <- function(hour){
 
 #' @title Fetch a list of airports
 #' @description Fetch a list of airports from \url{http://ourairports.com/data}. This data is Public Domain.
-#' @return a data.frame with columns id, continent, country, country_name, region, region_name, municipality, name, type, latitude, longitude, elevation, gps, iata, local_code, link, link_wikipedia
+#' @return a data.frame with columns id, continent, country, country_name, region, region_name, municipality, name, type, latitude (in degrees), longitude (in degrees), elevation (in feet), gps, iata, local_code, link, link_wikipedia
 #' @export
 #' @examples 
 #' \dontrun{
