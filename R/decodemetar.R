@@ -7,9 +7,8 @@
 #' @return a list of elements with information contained in the METAR string.
 #' The list contains data of a similar structure as the decoded_METAR structure
 #' in /src/metar.h. See the examples.
-# @useDynLib RMETAR decodeMETAR_
 #' @export
-#' @example inst/examples/example_decodemetar.R
+#' @examples inst/examples/example_decodemetar.R
 decodemetar <- function(x, printdecodedmetar = FALSE){
   x <- as.character(x)
   printdecodedmetar <- as.logical(printdecodedmetar)
