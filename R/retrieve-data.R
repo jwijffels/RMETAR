@@ -24,6 +24,7 @@ download_current_metar_cycle <- function(hour){
   idx_time    <- seq.int(from = 1, to = length(x), by = 3)
   idx_metar   <- seq.int(from = 2, to = length(x), by = 3)
   metars      <- data.frame(time = x[idx_time], metar = x[idx_metar], stringsAsFactors = FALSE)
+  metars      <- unique(metars)
   metars$time <- gsub("/", "-", metars$time)
   metars$time <- fasttime::fastPOSIXct(metars$time, tz = "GMT", required.components = 5)
   metars
