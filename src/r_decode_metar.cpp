@@ -118,7 +118,7 @@ NumericVector numeric_vector(float x){
 
 
 // [[Rcpp::export]]
-List r_decode_metar_(std::string metarcode) {
+Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   Decoded_METAR Metar;
   Decoded_METAR *Mptr = &Metar;
   int decoded_error;
