@@ -215,17 +215,6 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   z
   .add("inches_altstng", numeric_vector(Mptr->inches_altstng));
   
-  
-    
-  
-  // Decode printed string using sprint_metar() --------------------------------
-  char printout[5000];
-  sprint_metar(printout, Mptr);
-
-  z
-    .add("METAR", Rf_mkString(invec))
-    .add("printout", Rf_mkString(printout));
-  
   // Add runway visual range ---------------------------------------------------
   
   z
@@ -268,6 +257,14 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
     .add("Cloud_Conditions_3", r_extract_cloud_conditions_(Mptr, 3))
     .add("Cloud_Conditions_4", r_extract_cloud_conditions_(Mptr, 4))
     .add("Cloud_Conditions_5", r_extract_cloud_conditions_(Mptr, 5));
+  
+  // Decode printed string using sprint_metar() --------------------------------
+  char printout[5000];
+  sprint_metar(printout, Mptr);
+  
+  z
+    .add("METAR", Rf_mkString(invec))
+    .add("printout", Rf_mkString(printout));
   
   return z.convert_to_dataframe();
 }
