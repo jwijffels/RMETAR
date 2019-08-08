@@ -2,12 +2,12 @@
 % Please edit documentation in R/retrieve-data.R
 \name{download_airports}
 \alias{download_airports}
-\title{Fetch a list of airports}
+\title{Fetch a list of airports.}
 \usage{
 download_airports()
 }
 \value{
-a data.frame with columns id, continent, country, country_name, region, region_name, municipality, name, type, latitude (in degrees), longitude (in degrees), elevation (in feet), gps, iata, local_code, link, link_wikipedia
+a data.frame with columns \code{id}, \code{iata}, \code{continent}, \code{country}, \code{country_name}, \code{region}, \code{region_name}, \code{municipality}, \code{name}, \code{type}, \code{latitude} (in degrees), \code{longitude} (in degrees), \code{elevation} (in feet), \code{gps}, \code{local_code}, \code{link} and \code{link_wikipedia}
 }
 \description{
 Fetch a list of airports from \url{http://ourairports.com/data}. This data is Public Domain.
@@ -17,3 +17,7 @@ Fetch a list of airports from \url{http://ourairports.com/data}. This data is Pu
 x <- download_airports()
 }
 }
+\seealso{
+Other data functions: \code{\link{download_metar}}
+}
+\concept{data functions}

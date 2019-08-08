@@ -2,7 +2,7 @@
 % Please edit documentation in R/retrieve-data.R
 \name{download_metar}
 \alias{download_metar}
-\title{Retrieve current METAR data from NOAA}
+\title{Retrieve current METAR data from NOAA.}
 \usage{
 download_metar(hour)
 }
@@ -26,3 +26,7 @@ x <- download_metar(hour = 23)
 x <- lapply(0:23, download_metar)
 }
 }
+\seealso{
+Other data functions: \code{\link{download_airports}}
+}
+\concept{data functions}

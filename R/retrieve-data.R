@@ -1,10 +1,11 @@
 #' Retrieve current METAR data from NOAA.
 #' 
-#' Retrieve hourly cycles of METAR data from \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}
+#' Retrieve hourly cycles of METAR data from <https://tgftp.nws.noaa.gov/data/observations/metar/cycles>
 #' 
 #' @param hour an hour, either one of 0, 1, 2, up to 23
-#' @return a data.frame with columns time and metar containing the METARS from the selected hour currently at \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}
+#' @return a `data.frame` with columns `time` and `metar` containing the METARS from the selected hour currently at <https://tgftp.nws.noaa.gov/data/observations/metar/cycles>
 #' @export
+#' @family data functions
 #' @examples
 #' x <- download_metar(hour = 12)
 #' \dontrun{
@@ -37,10 +38,12 @@ download_metar <- function(hour) {
 
 #' Fetch a list of airports.
 #' 
-#' Fetch a list of airports from \url{http://ourairports.com/data}. This data is Public Domain.
+#' Fetch a list of airports from <http://ourairports.com/data>. This data is Public Domain.
 #' 
-#' @return a data.frame with columns id, continent, country, country_name, region, region_name, municipality, name, type, latitude (in degrees), longitude (in degrees), elevation (in feet), gps, iata, local_code, link, link_wikipedia
+#' @return a data.frame with columns `id`, `iata`, `continent`, `country`, `country_name`, `region`, `region_name`, `municipality`, `name`, `type`, `latitude` (in degrees), `longitude` (in degrees), `elevation` (in feet), `gps`, `local_code`, `link` and `link_wikipedia`
+
 #' @export
+#' @family data functions
 #' @examples
 #' \dontrun{
 #' x <- download_airports()
@@ -101,9 +104,9 @@ download_airports <- function() {
     "gps_code", "local_code", "home_link", "wikipedia_link"
   )]
   colnames(x) <- c(
-    "id", "continent", "country", "country_name", "region", "region_name", 
+    "id", "iata", "continent", "country", "country_name", "region", "region_name", 
     "municipality", "name", "type", "latitude", "longitude", "elevation", "gps",
-    "iata", "local_code", "link", "link_wikipedia"
+    "local_code", "link", "link_wikipedia"
   )
   message("Done")
   x

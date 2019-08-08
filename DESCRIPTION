@@ -31,3 +31,4 @@ Imports:
     Rcpp,
     fasttime,
     utils
+Roxygen: list(markdown = TRUE)
