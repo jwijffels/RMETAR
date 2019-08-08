@@ -10,7 +10,7 @@ download_metar(hour)
 \item{hour}{an hour, either one of 0, 1, 2, up to 23}
 }
 \value{
-a data.frame with columns time and metar containing the METARS from the selected hour currently at \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}
+a \code{data.frame} with columns \code{time} and \code{metar} containing the METARS from the selected hour currently at \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}
 }
 \description{
 Retrieve hourly cycles of METAR data from \url{https://tgftp.nws.noaa.gov/data/observations/metar/cycles}

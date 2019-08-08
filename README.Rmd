@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # RMETAR
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/jwijffels/RMETAR.svg?branch=master)](https://travis-ci.org/jwijffels/RMETAR)
+[![CRAN status](https://www.r-pkg.org/badges/version/RMETAR)](https://CRAN.R-project.org/package=RMETAR)
 <!-- badges: end -->
 
 The goal of RMETAR is to provide a METAR decoder for R users, connecting to `mdsplib` (METAR Decoder Software Package Library - https://github.com/flightaware/mdsplib) 
