@@ -24,26 +24,4 @@ Rcpp::List r_extract_recent_wx_(Decoded_METAR *Mptr, int element);
 Rcpp::List r_extract_wind_(Decoded_METAR *Mptr);
 Rcpp::List r_extract_cloud_conditions_(Decoded_METAR *Mptr, int element);
 
-
-
-class ListBuilder {
-  
-public:
-  
-  ListBuilder() {};
-  ~ListBuilder() {};
-  
-  ListBuilder& add(std::string const& name, SEXP x);
-  Rcpp::List convert_to_list() const;
-  Rcpp::DataFrame convert_to_dataframe() const;
-
-  private:
-  
-  std::vector<std::string> names;
-  std::vector<SEXP> elements;
-  
-  ListBuilder(ListBuilder const&) {}; // not safe to copy
-};
-
-
 #endif

@@ -14,6 +14,7 @@ extern "C" {
 } // end extern "C"
 
 #include "r_helpers.h"
+#include "r_listbuilder.h"
 
 
 
