@@ -135,7 +135,11 @@ void freex(void *, char *, int);
  
 typedef unsigned char byte;
  
+#ifndef mdsp_bool
+#define mdsp_bool
 typedef unsigned short int MDSP_BOOL;
+#endif
+
  
 typedef unsigned short int Devaddr;
  
@@ -1090,7 +1094,7 @@ int strhash(char *);
 void reverse(char *);
  
 #ifndef _WIN32
-MDSP_BOOL itoa(int, char *, int);
+// MDSP_BOOL itoa(int, char *, int);
 #endif
  
 int getsnn(char * , int);

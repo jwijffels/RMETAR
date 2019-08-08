@@ -1,4 +1,6 @@
+
 local({
+  if (isNamespaceLoaded("RMETAR")) unloadNamespace("RMETAR")
   lib_url <- "https://github.com/flightaware/mdsplib/archive/master.zip"
   
   if (!exists("tf")) tf <- tempfile(fileext = ".zip")
@@ -8,12 +10,9 @@ local({
   exclude <- c(
     "src/Makevars",
     "src/METAR_R_extraction.c",
-    "src/METAR_R_extraction.cold"
-  )
-  exclude <- c(
-    exclude, 
-    file.path("src",list.files("src", pattern = "^r_.*\\.[c|cpp]")),
-    file.path("src",list.files("src", pattern = "^METAR_R.*\\.[c|cpp]"))
+    "src/METAR_R_extraction.cold",
+    file.path("src", list.files("src", pattern = "^r_.*\\.[c|cpp|h]")),
+    file.path("src", list.files("src", pattern = "^METAR_R.*\\.[c|cpp|h]"))
   )
   to_delete <- setdiff(local_files, exclude)
   file.remove(to_delete)
@@ -29,15 +28,13 @@ local({
       "mdsplib-master/src/metar_test.c"
     )
     extract <- setdiff(extract, exclude)
-    # files
-    unzip(tf, files = extract, exdir = folder, junkpaths = TRUE)
+    unzip(tf, files = extract, exdir = "src", junkpaths = TRUE)
   }
   
-  # folder <- "src"
   extract_folder("src")
   extract_folder("include")
   
   
-  # source("scripts/comment_all_pragmas.R")
+  source("scripts/fix_mdsplib.R")
 })
 
