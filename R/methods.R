@@ -1,6 +1,6 @@
 #' @export
-str.decodedMETAR <- function(x, list.len = 500, ...){
-  NextMethod("str", x, list.len = list.len, ...)
+str.decodedMETAR <- function(object, list.len = 500, ...){
+  NextMethod("str", object, list.len = list.len, ...)
 }
 
 
