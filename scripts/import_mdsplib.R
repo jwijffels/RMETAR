@@ -1,11 +1,13 @@
 
 local({
+  # download mdsplib and unzip
   if (isNamespaceLoaded("RMETAR")) unloadNamespace("RMETAR")
   lib_url <- "https://github.com/flightaware/mdsplib/archive/master.zip"
   
   if (!exists("tf")) tf <- tempfile(fileext = ".zip")
   if (!file.exists(tf)) download.file(lib_url, destfile = tf)
   
+  # delete local files
   local_files <- list.files("src", full.names = TRUE)
   exclude <- c(
     "src/Makevars",
@@ -17,6 +19,7 @@ local({
   to_delete <- setdiff(local_files, exclude)
   file.remove(to_delete)
   
+  # function to extract necessary mdsplib files
   extract_folder <- function(folder){
     files <- unzip(tf, list = TRUE)$Name
     idx <- grep(
@@ -31,10 +34,21 @@ local({
     unzip(tf, files = extract, exdir = "src", junkpaths = TRUE)
   }
   
+  # extract src and include into src/
   extract_folder("src")
   extract_folder("include")
   
   
-  source("scripts/fix_mdsplib.R")
+  # fix for having moved metar.h from include/ into src/
+  c_files <- list.files("src", pattern = "\\.[ch]$", full.names = TRUE)
+  
+  for (f in c_files) {
+    message(f)
+    f %>% 
+      readLines() %>% 
+      gsub('#include "../include/metar.h"', '#include "metar.h"', fixed=TRUE, .) %>% 
+      writeLines(con = f)
+  }
+  
 })
 

@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <string.h>
 #include "metar_structs.h"     /* standard header file */
 
-float fracPart( char * );
+float fracPart( const char * );
 void decode_metar_remark( char **, Decoded_METAR * );
 void print_decoded_metar( Decoded_METAR * );
 
@@ -57,7 +57,7 @@ void print_decoded_metar( Decoded_METAR * );
 /*                                                                  */
 /********************************************************************/
  
-static char **SaveTokenString ( char *string , char *delimeters )
+static char **SaveTokenString ( char *instring , char *delimeters )
 {
    int NDEX;
    static char *token[ MAXTOKENS ], *TOKEN;
@@ -66,7 +66,7 @@ static char **SaveTokenString ( char *string , char *delimeters )
    /* AND SAVE THE TOKENS TO THE token ARRAY */
  
    NDEX = 0;
-   TOKEN = strtok(string, delimeters);
+   TOKEN = strtok(instring, delimeters);
  
    if( TOKEN == NULL )
       return NULL;
@@ -542,39 +542,39 @@ static int CodedHgt2Meters( char *token, Decoded_METAR *Mptr )
 /*                                                                  */
 /********************************************************************/
 
-static MDSP_BOOL isPartialObscuration( char **string, Decoded_METAR *Mptr,
+static MDSP_BOOL isPartialObscuration( char **instring, Decoded_METAR *Mptr,
                           int *NDEX )
 {
  
-   if( *string == NULL )
+   if( *instring == NULL )
       return FALSE;
  
-   if( strcmp( *string, "FEW///" ) == 0 ||
-       strcmp( *string, "SCT///" ) == 0 ||
-       strcmp( *string, "BKN///" ) == 0 ||
-       strcmp( *string, "FEW000" ) == 0 ||
-       strcmp( *string, "SCT000" ) == 0 ||
-       strcmp( *string, "BKN000" ) == 0    ) {
-      strcpy( Mptr->PartialObscurationAmt[0], *string );
+   if( strcmp( *instring, "FEW///" ) == 0 ||
+       strcmp( *instring, "SCT///" ) == 0 ||
+       strcmp( *instring, "BKN///" ) == 0 ||
+       strcmp( *instring, "FEW000" ) == 0 ||
+       strcmp( *instring, "SCT000" ) == 0 ||
+       strcmp( *instring, "BKN000" ) == 0    ) {
+      strcpy( Mptr->PartialObscurationAmt[0], *instring );
       (*NDEX)++;
-      string++;
+      instring++;
  
-      if( *string == NULL )
+      if( *instring == NULL )
          return TRUE;
  
-      if( strcmp( (*string+3), "///") ) {
-          if( strcmp( *string, "FEW000" ) == 0 ||
-              strcmp( *string, "SCT000" ) == 0 ||
-              strcmp( *string, "BKN000" ) == 0    ) {
-            strcpy( Mptr->PartialObscurationAmt[1], *string );
+      if( strcmp( (*instring+3), "///") ) {
+          if( strcmp( *instring, "FEW000" ) == 0 ||
+              strcmp( *instring, "SCT000" ) == 0 ||
+              strcmp( *instring, "BKN000" ) == 0    ) {
+            strcpy( Mptr->PartialObscurationAmt[1], *instring );
             (*NDEX)++;
          }
       }
       else {
-         if( strcmp( *string, "FEW///" ) == 0 ||
-             strcmp( *string, "SCT///" ) == 0 ||
-             strcmp( *string, "BKN///" ) == 0 ) {
-            strcpy( Mptr->PartialObscurationAmt[1], *string );
+         if( strcmp( *instring, "FEW///" ) == 0 ||
+             strcmp( *instring, "SCT///" ) == 0 ||
+             strcmp( *instring, "BKN///" ) == 0 ) {
+            strcpy( Mptr->PartialObscurationAmt[1], *instring );
             (*NDEX)++;
          }
       }
@@ -1314,103 +1314,6 @@ static MDSP_BOOL isVisibility( char **visblty, Decoded_METAR *Mptr,
  
 }
  
-/********************************************************************/
-/*                                                                  */
-/*  Title:         variableVisibility                               */
-/*  Organization:  W/OSO242 - GRAPHICS AND DISPLAY SECTION          */
-/*  Date:          15 Sep 1994                                      */
-/*  Programmer:    CARL MCCALLA                                     */
-/*  Language:      C/370                                            */
-/*                                                                  */
-/*  Abstract:                                                       */
-/*                                                                  */
-/*  External Functions Called:                                      */
-/*                 None.                                            */
-/*                                                                  */
-/*  Input:         x                                                */
-/*                                                                  */
-/*  Output:        x                                                */
-/*                                                                  */
-/*  Modification History:                                           */
-/*                 None.                                            */
-/*                                                                  */
-/********************************************************************/
-
-static MDSP_BOOL variableVisibility( char *string1, char *string2,
-                      Decoded_METAR *Mptr, int *NDEX )
-{
-   char buf[ 32 ];
-   int numerator,
-       denominator;
-   char *slash,
-        *V_char,
-        *temp;
- 
-   if( string1 == NULL )
-      return FALSE;
- 
-   V_char = strchr(string1,'V');
-   slash =  strchr(string1,'/');
- 
-   if(slash == NULL)
-   {
-      if(nisdigit(string1,V_char-string1))
-      {
-         memset(buf, '\0', sizeof(buf));
-         strncpy(buf, string1, V_char-string1);
- 
-         if( Mptr->minVsby != (float) MAXINT )
-            Mptr->minVsby += (float) atoi(buf);
-         else
-            Mptr->minVsby  = (float) atoi(buf);
- 
-         memset(buf, '\0', sizeof(buf));
-         strncpy(buf, V_char+1, 5);
-         Mptr->maxVsby = (float) atoi(buf);
- 
-      }
-      else
-         return FALSE;
-   }
-   else
-   {
-      temp = (char *) malloc(sizeof(char)*((V_char-string1)+1));
-      memset(temp, '\0', (V_char-string1) +1);
-      strncpy(temp, string1, V_char-string1);
-      if( Mptr->minVsby != MAXINT )
-         Mptr->minVsby += fracPart(temp);
-      else
-         Mptr->minVsby = fracPart(temp);
- 
-      free( temp );
- 
-      if( strchr(V_char+1,'/') != NULL)
-         Mptr->maxVsby = fracPart(V_char+1);
-      else
-         Mptr->maxVsby = (float) atoi(V_char+1);
-   }
- 
-   if( string2 == NULL )
-      return TRUE;
-   else
-   {
-      slash = strchr( string2, '/' );
- 
-      if( slash == NULL )
-         return TRUE;
-      else
-      {
-         if( nisdigit(string2,slash-string2) &&
-             nisdigit(slash+1,strlen(slash+1)) )
-         {
-            Mptr->maxVsby += fracPart(string2);
-            (*NDEX)++;
-         }
-         return TRUE;
-      }
-   }
- 
-}
  
 /********************************************************************/
 /*                                                                  */
@@ -1434,25 +1337,25 @@ static MDSP_BOOL variableVisibility( char *string1, char *string2,
 /*                                                                  */
 /********************************************************************/
 
-static MDSP_BOOL isMinMaxWinDir( char *string, Decoded_METAR *Mptr,
+static MDSP_BOOL isMinMaxWinDir( char *instring, Decoded_METAR *Mptr,
      int *NDEX )
 {
 #define buf_len 50
    char buf[ buf_len ];
    char *V_char;
  
-   if( string == NULL )
+   if( instring == NULL )
       return FALSE;
  
-   if( (V_char = strchr(string,'V')) == NULL )
+   if( (V_char = strchr(instring,'V')) == NULL )
       return FALSE;
    else
    {
-      if( nisdigit(string,(V_char - string)) &&
+      if( nisdigit(instring,(V_char - instring)) &&
                nisdigit(V_char+1,3) )
       {
          memset( buf, '\0', buf_len);
-         strncpy( buf, string, V_char - string);
+         strncpy( buf, instring, V_char - instring);
          Mptr->minWnDir = atoi( buf );
  
          memset( buf, '\0', buf_len);
@@ -1742,43 +1645,6 @@ static MDSP_BOOL isTempGroup( char *token, Decoded_METAR *Mptr, int *NDEX)
 }
  
  
-/********************************************************************/
-/*                                                                  */
-/*  Title:         isWxToken                                        */
-/*  Organization:  W/OSO242 - GRAPHICS AND DISPLAY SECTION          */
-/*  Date:          15 Sep 1994                                      */
-/*  Programmer:    CARL MCCALLA                                     */
-/*  Language:      C/370                                            */
-/*                                                                  */
-/*  Abstract:                                                       */
-/*                                                                  */
-/*  External Functions Called:                                      */
-/*                 None.                                            */
-/*                                                                  */
-/*  Input:         x                                                */
-/*                                                                  */
-/*  Output:        x                                                */
-/*                                                                  */
-/*  Modification History:                                           */
-/*                 None.                                            */
-/*                                                                  */
-/********************************************************************/
- 
-static MDSP_BOOL isWxToken( char *token )
-{
-   int i;
- 
-   if( token == NULL )
-      return FALSE;
-   for( i = 0; i < strlen(token); i++ )
-   {
-      if( !(isalpha(*(token+i)) || *(token+i) == '+' ||
-                                   *(token+i) == '-' ||
-                                   *(token+i) == '/'  ) )
-         return FALSE;
-   }
-   return TRUE;
-}
  
 /********************************************************************/
 /*                                                                  */
@@ -2211,8 +2077,6 @@ static char* defaultWindUnitsForAirport( char *airportId )
    static char *airportPrefixUsingMPS[1] = { "Z" },
                *airportPrefixWithoutDefault[1] = { "U" };
 
-   char airportPrefix = airportId[0];
-
    /* Check that an ICAO airport code has been passed in. */
    if( strlen(airportId) != 4 ) {
       return "";
@@ -2259,8 +2123,8 @@ static MDSP_BOOL isWindData( char *wind, Decoded_METAR *Mptr, int *NDEX )
 {
  
    char *GustPtr,
-        *unitsPtr,
-        *defaultUnit;
+        *unitsPtr;
+   
    char dummy[8];
  
    if( wind == NULL )
@@ -2434,7 +2298,7 @@ printf("isWindData:  Passed dddff(f) test - wind = %s\n",wind);
 /*                                                                  */
 /********************************************************************/
  
-int decode_metar( char *string , Decoded_METAR *Mptr )
+int decode_metar( const char *instring , Decoded_METAR *Mptr )
 {
    /* DECLARE LOCAL VARIABLES */
  
@@ -2447,14 +2311,9 @@ int decode_metar( char *string , Decoded_METAR *Mptr )
                                       SaveStartGroup,
                                       MetarGroup;
  
-   WindStruct *WinDataPtr;
- 
+
    int    ndex,
-          NDEX,
-          i,
-          jkj,
-          j;
- 
+          NDEX;
  
    char   **token,
           *delimeters = {" "},
@@ -2462,9 +2321,9 @@ int decode_metar( char *string , Decoded_METAR *Mptr )
  
    MDSP_BOOL IS_NOT_RMKS;
  
-   /* ONLY PARSE OR DECOCODE NON-NULL METAR REPORT STRINGS */
+   /* ONLY PARSE OR DECODE NON-NULL METAR REPORT STRINGS */
  
-   if( string == NULL || *string == '\0' )
+   if( instring == NULL || *instring == '\0' )
       return 8;
  
  
@@ -2481,8 +2340,8 @@ int decode_metar( char *string , Decoded_METAR *Mptr )
 	 * strtok() don't like that.
 	 */
 	
-	stringCpy = calloc(strlen(string) + 1, sizeof(char));
-	strcpy(stringCpy, string);
+	stringCpy = calloc(strlen(instring) + 1, sizeof(char));
+	strcpy(stringCpy, instring);
 
  
    /* TOKENIZE AND STORE THE INPUT METAR REPORT STRING */
@@ -2516,6 +2375,7 @@ if( strcmp(token[0],"OPKC") == 0 || strcmp(token[0],"TAPA") == 0 ) {
     if( strcmp( token[NDEX], "RMK" ) != 0 ) {
  
       StartGroup = NotIDed;
+      SaveStartGroup = StartGroup;
  
 #ifdef DEBUGZZ
 if( strcmp(token[0],"OPKC") == 0 || strcmp(token[0],"TAPA") == 0 ) {
@@ -2721,21 +2581,21 @@ print_decoded_metar( Mptr );
 /*                                                                  */
 /********************************************************************/
 
-int decode_net_metar (char *string, Decoded_METAR *Mptr)
+int decode_net_metar (const char *instring, Decoded_METAR *Mptr)
 {
 	char *string_cpy, *ptr;
 	int result;
 	
 	/* Strip the date, which is the first line. */
-	while (*string != '\n')
+	while (*instring != '\n')
 	{
-		++string;
+		++instring;
 	}
-	++string;
+	++instring;
 	
 	/* make a copy of the string without the date */
-	string_cpy = (char *) calloc(strlen(string), sizeof(char));
-	strcpy(string_cpy, string);
+	string_cpy = (char *) calloc(strlen(instring), sizeof(char));
+	strcpy(string_cpy, instring);
 	
 	/* replace all carrage returns with spaces */
 	ptr = string_cpy;

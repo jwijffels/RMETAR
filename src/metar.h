@@ -43,7 +43,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 typedef unsigned short int MDSP_BOOL;
 #endif
 
-
 #define MAX_RUNWAYS 12
 #define MAX_CLOUD_GROUPS 6
 #define MAX_SURFACE_OBSCURATIONS 6
@@ -315,7 +314,7 @@ typedef struct decoded_METAR {
 /*                                                                  */
 /********************************************************************/
 
-int decode_metar( char *string , Decoded_METAR *Mptr );
+int decode_metar( const char *instring , Decoded_METAR *Mptr );
 
 
 
@@ -371,7 +370,7 @@ void print_decoded_metar( Decoded_METAR *Mptr );
 /*                                                                  */
 /********************************************************************/
 
-int decode_net_metar (char *string, Decoded_METAR *Mptr);
+int decode_net_metar (const char *instring, Decoded_METAR *Mptr);
 
 
 /********************************************************************/
@@ -391,7 +390,7 @@ int decode_net_metar (char *string, Decoded_METAR *Mptr);
 /*                                                                  */
 /********************************************************************/
 
-void sprint_metar( char *string, Decoded_METAR *Mptr );
+void sprint_metar( char *outstring, Decoded_METAR *Mptr );
 
 
 #endif // MDSPLIB_METAR_H__
