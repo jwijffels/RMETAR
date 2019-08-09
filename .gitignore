@@ -9,3 +9,5 @@
 *\.[oa]
 inst/doc
 dev
+docs/
+.vscode/*
