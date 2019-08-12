@@ -219,32 +219,64 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   // Add runway visual range ---------------------------------------------------
   
   for(int i=0; i<MAX_RUNWAYS; i++){
-    var = "RunwayVisRange_"  + std::to_string(i+1);
-    z.add(var, r_extract_runway_visrange_(Mptr, i));
+    var = "runway_visible_range_"  + std::to_string(i+1) + "_";
+    z
+     .add(var + "vrbl_visRange" , logical_vector(Mptr->DVR.vrbl_visRange))
+     .add(var + "below_min_DVR" , logical_vector(Mptr->DVR.below_min_DVR)) 
+     .add(var + "above_max_DVR" , logical_vector(Mptr->DVR.above_max_DVR)) 
+     .add(var + "range"         , integer_vector(Mptr->DVR.visRange)) 
+     .add(var + "max"           , integer_vector(Mptr->DVR.Max_visRange))
+     .add(var + "min"           , integer_vector(Mptr->DVR.Min_visRange));
+      
   }
 
   // Add dispatch visual range ---------------------------------------------------
   
+  var = "dispatch_visible_range_";
   z
-    .add("Dispatch_VisRange", r_extract_dispatch_visrange_(Mptr));
+    .add(var + "vrbl_visRange" , logical_vector(Mptr->DVR.vrbl_visRange))
+    .add(var + "below_min_DVR" , logical_vector(Mptr->DVR.below_min_DVR))
+    .add(var + "above_max_DVR" , logical_vector(Mptr->DVR.above_max_DVR))
+    .add(var + "visRange"      , integer_vector(Mptr->DVR.visRange))
+    .add(var + "Max_visRange"  , integer_vector(Mptr->DVR.Max_visRange))
+    .add(var + "Min_visRange"  , integer_vector(Mptr->DVR.Min_visRange));
+    
 
   // Add recent_wx             ---------------------------------------------------  
 
   for(int i=0; i<2; i++){
-    var = "Recent_Wx_"  + std::to_string(i+1);
-    z.add(var, r_extract_recent_wx_(Mptr, i));
+    var = "recent_weather_"  + std::to_string(i+1) + "_";
+    z
+    .add(var + "recent_weather" , string_or_na(Mptr->ReWx[i].Recent_weather))
+    .add(var + "bhh"            , integer_vector(Mptr->ReWx[i].Bhh))
+    .add(var + "bmm"            , integer_vector(Mptr->ReWx[i].Bmm))
+    .add(var + "ehh"            , integer_vector(Mptr->ReWx[i].Ehh))
+    .add(var + "emm"            , integer_vector(Mptr->ReWx[i].Emm));
+    
   }
 
   // Add wind                  ---------------------------------------------------
   
+  var  = "wind_struct_";
   z
-    .add("windstruct", r_extract_wind_(Mptr));
+    .add(var + "units" , string_or_na(Mptr->winData.windUnits))
+    .add(var + "vrb"   , logical_vector(Mptr->winData.windVRB)) 
+    .add(var + "dir"   , integer_vector(Mptr->winData.windDir)) 
+    .add(var + "speed" , integer_vector(Mptr->winData.windSpeed))
+    .add(var + "gust"  , integer_vector(Mptr->winData.windGust));
+    
   
   // Add cloud condition       ---------------------------------------------------
   
   for(int i=0; i<MAX_CLOUD_GROUPS; i++){
-    var = "Cloud_Conditions_"  + std::to_string(i+1);
-    z.add(var, r_extract_cloud_conditions_(Mptr, i));
+    var = "cloud_conditions_"  + std::to_string(i+1) + "_";
+    // z.add(var, r_extract_cloud_conditions_(Mptr, i));
+    z  
+      .add(var + "cloud_type"      , string_or_na(Mptr->cloudGroup[i].cloud_type))
+      .add(var + "cloud_height"    , string_or_na(Mptr->cloudGroup[i].cloud_hgt_char))
+      .add(var + "cloud_phenomena" , string_or_na(Mptr->cloudGroup[i].other_cld_phenom))
+      .add(var + "cloud_height_m"  , integer_vector(Mptr->cloudGroup[i].cloud_hgt_meters));
+    
   }
 
   // Decode printed string using sprint_metar() --------------------------------
