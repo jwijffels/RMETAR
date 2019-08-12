@@ -80,15 +80,15 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
     .add("VISNO_LOC",       string_or_na(Mptr->VISNO_LOC));
   
   for(int i=0; i<7; i++){
-    var = "PartialObscurationAmt_"  + std::to_string(i);
+    var = "PartialObscurationAmt_"  + std::to_string(i+1);
     z.add(var,  string_or_na(Mptr->PartialObscurationAmt[i]));
   }
   for(int i=0; i<12; i++){
-    var = "PartialObscurationPhenom_"  + std::to_string(i);
+    var = "PartialObscurationPhenom_"  + std::to_string(i+1);
     z.add(var,  string_or_na(Mptr->PartialObscurationPhenom[i]));
   }
   for(int i=0; i<10; i++){
-    var = "SfcObscuration_"  + std::to_string(i);
+    var = "SfcObscuration_"  + std::to_string(i+1);
     z.add(var,  string_or_na(Mptr->SfcObscuration[i]));
   }
   
@@ -218,19 +218,10 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   
   // Add runway visual range ---------------------------------------------------
   
-  z
-     .add("Runway_VisRange_0", r_extract_runway_visrange_(Mptr, 0))
-     .add("Runway_VisRange_1", r_extract_runway_visrange_(Mptr, 1))
-     .add("Runway_VisRange_2", r_extract_runway_visrange_(Mptr, 2))
-     .add("Runway_VisRange_3", r_extract_runway_visrange_(Mptr, 3))
-     .add("Runway_VisRange_4", r_extract_runway_visrange_(Mptr, 4))
-     .add("Runway_VisRange_5", r_extract_runway_visrange_(Mptr, 5))
-     .add("Runway_VisRange_6", r_extract_runway_visrange_(Mptr, 6))
-     .add("Runway_VisRange_7", r_extract_runway_visrange_(Mptr, 7))
-     .add("Runway_VisRange_8", r_extract_runway_visrange_(Mptr, 8))
-     .add("Runway_VisRange_9", r_extract_runway_visrange_(Mptr, 9))
-     .add("Runway_VisRange_10", r_extract_runway_visrange_(Mptr, 10))
-     .add("Runway_VisRange_11", r_extract_runway_visrange_(Mptr, 11));
+  for(int i=0; i<MAX_RUNWAYS; i++){
+    var = "RunwayVisRange_"  + std::to_string(i+1);
+    z.add(var, r_extract_runway_visrange_(Mptr, i));
+  }
 
   // Add dispatch visual range ---------------------------------------------------
   
@@ -239,11 +230,11 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
 
   // Add recent_wx             ---------------------------------------------------  
 
-  z
-    .add("Recent_Wx_0", r_extract_recent_wx_(Mptr, 0))
-    .add("Recent_Wx_1", r_extract_recent_wx_(Mptr, 1))
-    .add("Recent_Wx_2", r_extract_recent_wx_(Mptr, 2));
-  
+  for(int i=0; i<2; i++){
+    var = "Recent_Wx_"  + std::to_string(i+1);
+    z.add(var, r_extract_recent_wx_(Mptr, i));
+  }
+
   // Add wind                  ---------------------------------------------------
   
   z
@@ -251,14 +242,11 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
   
   // Add cloud condition       ---------------------------------------------------
   
-  z
-    .add("Cloud_Conditions_0", r_extract_cloud_conditions_(Mptr, 0))
-    .add("Cloud_Conditions_1", r_extract_cloud_conditions_(Mptr, 1))
-    .add("Cloud_Conditions_2", r_extract_cloud_conditions_(Mptr, 2))
-    .add("Cloud_Conditions_3", r_extract_cloud_conditions_(Mptr, 3))
-    .add("Cloud_Conditions_4", r_extract_cloud_conditions_(Mptr, 4))
-    .add("Cloud_Conditions_5", r_extract_cloud_conditions_(Mptr, 5));
-  
+  for(int i=0; i<MAX_CLOUD_GROUPS; i++){
+    var = "Cloud_Conditions_"  + std::to_string(i+1);
+    z.add(var, r_extract_cloud_conditions_(Mptr, i));
+  }
+
   // Decode printed string using sprint_metar() --------------------------------
   char printout[5000];
   sprint_metar(printout, Mptr);
