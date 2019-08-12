@@ -4,7 +4,7 @@
 \name{RMETAR-package}
 \alias{RMETAR}
 \alias{RMETAR-package}
-\title{RMETAR: Functionality to extract weather information from METAR reports.}
+\title{RMETAR: Extract Weather Information From METAR Reports}
 \description{
 Functions to extract weather information from METAR reports
     (Aviation Routine Weather Reports). Using the METAR Decoder Software
@@ -23,7 +23,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Eric McCarthy \email{eric@desert.net} [copyright holder]
+  \item Eric McCarthy \email{eric@limulus.net} [copyright holder]
 }
 
 }

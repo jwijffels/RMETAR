@@ -1,25 +1,34 @@
 Package: RMETAR
-Title: Functionality to extract weather information from METAR reports.
+Title: Extract Weather Information From METAR Reports
 Description: Functions to extract weather information from METAR reports
     (Aviation Routine Weather Reports). Using the METAR Decoder Software
     Package Library (mdsplib) which is provided by the National Weather
     Service.
 Type: Package
 License: LGPL-2.1
-Version: 1.0
-Date: 2013-07-25
+Version: 1.0.0.9000
+Date: 2019-08-05
 Authors@R: c(
     person("Jan", "Wijffels", role = c("aut", "cre", "cph"), email = "jwijffels@bnosac.be"), 
-    person("Eric", "McCarthy", role = c("cph"), email = "eric@desert.net")
+    person("Eric", "McCarthy", role = c("cph"), email = "eric@limulus.net")
     )
 Copyright: C code in the src folder is taken and adapted from
-    http://sourceforge.net/projects/mdsplib/ for which Copyright belongs to
+    https://github.com/flightaware/mdsplib for which Copyright belongs to
     Eric McCarthy. This code has LGPL-2.1 license.
 URL: http://www.bnosac.be
+Depends:
+    R (>= 2.10)
 Suggests:
-    testthat (>= 2.1.0),
+    tinytest,
     knitr,
     rmarkdown
+VignetteBuilder: knitr 
 RoxygenNote: 6.1.1
 Encoding: UTF-8
-VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp
+Imports: 
+    Rcpp,
+    fasttime,
+    utils
+Roxygen: list(markdown = TRUE)

@@ -1,3 +1,5 @@
+#ifndef MDSPLIB_METAR_H__
+#define MDSPLIB_METAR_H__
 
 /* ref: http://limulus.net/mdsplib */
 /*
@@ -36,9 +38,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /********************************************************************/
  
 /* Used in the METAR structs. */
+#ifndef mdsp_bool
+#define mdsp_bool
 typedef unsigned short int MDSP_BOOL;
+#endif
 
- 
+#define MAX_RUNWAYS 12
+#define MAX_CLOUD_GROUPS 6
+#define MAX_SURFACE_OBSCURATIONS 6
+#define MAX_PARTIAL_OBSCURATIONS 2
+
+typedef enum distance_unit { DIST_FEET, DIST_METERS } Distance_Unit;
+
 /*********************************************/
 /*                                           */
 /* RUNWAY VISUAL RANGE STRUCTURE DECLARATION */
@@ -54,6 +65,7 @@ typedef struct runway_VisRange {
    int  visRange;
    int  Max_visRange;
    int  Min_visRange;
+   Distance_Unit distance_unit;
 }  Runway_VisRange;
  
 /***********************************************/
@@ -153,11 +165,9 @@ typedef struct decoded_METAR {
    char TornadicMovDir[3];
    char CHINO_LOC[6];
    char VISNO_LOC[6];
-   char PartialObscurationAmt[2][7];
-   char PartialObscurationPhenom[2][12];
-   char SfcObscuration[6][10];
-   char charPrevailVsby[12];
-   char charVertVsby[10];
+   char PartialObscurationAmt[MAX_PARTIAL_OBSCURATIONS][7];
+   char PartialObscurationPhenom[MAX_PARTIAL_OBSCURATIONS][12];
+   char SfcObscuration[MAX_SURFACE_OBSCURATIONS][10];
    char TS_LOC[3];
    char TS_MOVMNT[3];
  
@@ -203,7 +213,8 @@ typedef struct decoded_METAR {
    MDSP_BOOL OVHD_LTG;
    MDSP_BOOL LightningVCTS;
    MDSP_BOOL LightningTS;
- 
+   MDSP_BOOL visibilityIsUpperBound;
+
    int  TornadicDistance;
    int  ob_hour;
    int  ob_minute;
@@ -268,25 +279,25 @@ typedef struct decoded_METAR {
  
    double inches_altstng;
  
-   Runway_VisRange RRVR[12];
+   Runway_VisRange RRVR[MAX_RUNWAYS];
    Dispatch_VisRange DVR;
    Recent_Wx ReWx[3];
    WindStruct winData;
-   Cloud_Conditions cldTypHgt[6];
+   Cloud_Conditions cloudGroup[MAX_CLOUD_GROUPS];
  
 }  Decoded_METAR;
 
 
 /********************************************************************/
 /*                                                                  */
-/*  Title:         DcdMETAR                                         */
+/*  Title:         decode_metar                                     */
 /*  Organization:  W/OSO242 - GRAPHICS AND DISPLAY SECTION          */
 /*  Date:          14 Sep 1994                                      */
 /*  Programmer:    CARL MCCALLA                                     */
 /*  Language:      C/370                                            */
 /*                                                                  */
-/*  Abstract:      DcdMETAR takes a pointer to a METAR report char- */
-/*                 acter string as input, decodes the report, and   */
+/*  Abstract:      decode_metar takes a pointer to a METAR report   */
+/*                 string as input, decodes the report, and         */
 /*                 puts the individual decoded/parsed groups into   */
 /*                 a structure that has the variable type           */
 /*                 Decoded_METAR.                                   */
@@ -303,19 +314,20 @@ typedef struct decoded_METAR {
 /*                                                                  */
 /********************************************************************/
 
-int DcdMETAR( char *string , Decoded_METAR *Mptr );
+int decode_metar( const char *instring , Decoded_METAR *Mptr );
 
 
 
 /********************************************************************/
 /*                                                                  */
-/*  Title:         prtDMETR                                         */
+/*  Title:         print_decoded_metar                              */
 /*  Organization:  W/OSO242 - GRAPHICS AND DISPLAY SECTION          */
 /*  Date:          15 Sep 1994                                      */
 /*  Programmer:    CARL MCCALLA                                     */
 /*  Language:      C/370                                            */
 /*                                                                  */
-/*  Abstract:  prtDMETR    prints, in order of the ASOS METAR       */
+/*  Abstract:  print_decoded_metar                                  */
+/*             prints, in order of the ASOS METAR                   */
 /*             format, all non-initialized members of the structure */
 /*             addressed by the Decoded_METAR pointer.              */
 /*                                                                  */
@@ -331,20 +343,21 @@ int DcdMETAR( char *string , Decoded_METAR *Mptr );
 /*                                                                  */
 /********************************************************************/
 
-void prtDMETR( Decoded_METAR *Mptr );
+void print_decoded_metar( Decoded_METAR *Mptr );
 
 
 /********************************************************************/
 /*                                                                  */
-/*  Title:         dcdNetMETAR                                      */
+/*  Title:         decode_net_metar                                 */
 /*  Date:          24 Jul 2001                                      */
 /*  Programmer:    Eric McCarthy                                    */
 /*  Language:      C                                                */
 /*                                                                  */
-/*  Abstract:  dcdNetMETAR                                          */
+/*  Abstract:  decode_net_metar                                     */
 /*                 The METARs supplied by the NWS server need to    */
 /*                 be reformatted before they can be sent through   */
-/*                 dcdMETAR. This calls dcdMETAR on the correctly   */
+/*                 decode_metar.                                    */
+/*                 This calls dcdMETAR on the correctly             */
 /*                 formated METAR.                                  */
 /*                                                                  */
 /*  Input:         a pointer to a METAR string from a NWS server    */
@@ -357,7 +370,7 @@ void prtDMETR( Decoded_METAR *Mptr );
 /*                                                                  */
 /********************************************************************/
 
-int dcdNetMETAR (char *string, Decoded_METAR *Mptr);
+int decode_net_metar (const char *instring, Decoded_METAR *Mptr);
 
 
 /********************************************************************/
@@ -367,8 +380,8 @@ int dcdNetMETAR (char *string, Decoded_METAR *Mptr);
 /*  Programmer:    Eric McCarthy                                    */
 /*  Language:      C                                                */
 /*                                                                  */
-/*  Abstract:  sprtDMETR                                            */
-/*                 Does what prtDMETR does, but into a string.      */
+/*  Abstract:  sprint_metar                                         */
+/*      Does what print_decoded_metar does, but into a string.      */
 /*                                                                  */
 /*  Input:         string containing the printout, decoded METAR    */
 /*                                                                  */
@@ -377,6 +390,7 @@ int dcdNetMETAR (char *string, Decoded_METAR *Mptr);
 /*                                                                  */
 /********************************************************************/
 
-void sprint_metar( char *string, Decoded_METAR *Mptr );
+void sprint_metar( char *outstring, Decoded_METAR *Mptr );
 
 
+#endif // MDSPLIB_METAR_H__

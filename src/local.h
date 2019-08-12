@@ -86,7 +86,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define IN_RANGE(n, lo, hi) ((lo) <= (n) && (n) <= (hi))
 #define LOOPDN(r, n) for ((r) = (n)+1; --(r) > 0;)
 #define MAX(x, y)    (((x) < (y)) ? (y) : (x))
+#ifndef _WIN32
 #define max(x, y)    (((x) < (y)) ? (y) : (x))
+#endif
 #define MIN(x, y)    (((x) < (y)) ? (x) : (y))
 #define min(x, y)    (((x) < (y)) ? (x) : (y))
 #define STREQ(s, t)  (strcmp(s, t) == 0)
@@ -133,7 +135,11 @@ void freex(void *, char *, int);
  
 typedef unsigned char byte;
  
+#ifndef mdsp_bool
+#define mdsp_bool
 typedef unsigned short int MDSP_BOOL;
+#endif
+
  
 typedef unsigned short int Devaddr;
  
@@ -988,7 +994,7 @@ typedef struct sw_dir_info_rec {
   char flag1;
   char flag2;
   char flag3;
-  char class;
+  //char class;
   short int domestic_cat_num;
   char afos_tmp;
   char ccb[2];
@@ -1033,26 +1039,20 @@ int lmsg(const char *, const char *, ...);
 int emsg(const char *, const char *, ...);
 int omsg(const char *, const char *, ...);
  
-#pragma linkage(ASCTOEB, OS)
 void ASCTOEB(char *, int);
  
-#pragma linkage(EAXLATE, OS)
 void EAXLATE(char *, int);
  
-#pragma linkage(PASCTOEB, OS)
 void PASCTOEB(char *, int);
  
 char **bldhdarr(char *);
  
 void dalchdar(char **);
  
-#pragma linkage(CCAPREAD, OS)
 void *CCAPREAD(char *, int);
  
-#pragma linkage(CCAPWRIT, OS)
 void CCAPWRIT(char *, char *, int);
  
-#pragma linkage(PPTOI, OS)
 int PPTOI(char);
  
 char itopp(int);
@@ -1093,7 +1093,9 @@ int strhash(char *);
  
 void reverse(char *);
  
-//MDSP_BOOL itoa(int, char *, int);
+#ifndef _WIN32
+MDSP_BOOL itoa(int, char *, int);
+#endif
  
 int getsnn(char * , int);
  
@@ -1116,10 +1118,8 @@ int addrcmp(Diskaddr *, Diskaddr *);
 void incraddr(Diskaddr *, Diskaddr *, Diskaddr *);
 void decraddr(Diskaddr *, Diskaddr *, Diskaddr *);
  
-#pragma linkage(readrec, OS)
 char *readrec(Diskaddr *, Devaddr *, int, void *);
  
-#pragma linkage(writerec, OS)
 int writerec(Diskaddr*, Devaddr *, int, void *);
  
 char prhold(char *, ...);
@@ -1141,11 +1141,12 @@ char toebcdic(char);
 char *strtoeb(char *);
  
 char *strntoeb(char *, int);
- 
-char *lfind(char *, char *, int, int, int(*)(char *, char *));
- 
+
+#ifndef _WIN32
+char *lfind(char *, char *, int, int, int(*)(char *, char *)); 
 char *lsearch(char *, char *, int *, int, int(*)(char *, char *));
- 
+#endif
+
 MDSP_BOOL strcmpw(char *, char *);
  
 int strccnt(char *, int);
@@ -1171,15 +1172,7 @@ MDSP_BOOL gtoj(int, int, int, int *, int *);
 MDSP_BOOL ccap2std(char *, Devaddr *, Diskaddr *);
  
 MDSP_BOOL std2ccap(Devaddr *, Diskaddr *, char *);
- 
-char *strupr(char *);
-char *strlwr(char *);
-/* char *strdup(char *); */
-/* char *strndup(char *, int); */
-//int strcmpi(char *, char *);
- 
-/* void *memccpy(void *, void *, int, unsigned); */
- 
+
 char *rptstrip(char *);
 char *rptstrp2(char *);
 char *rptfmt(char *);
@@ -1187,13 +1180,13 @@ char *rptfmt2(char *);
 char *rptfmti(char *, unsigned short int);
 char *rptfmtni(char *, unsigned short int);
  
-char *strnstr(char *, char *, size_t);
+// char *strnstr(char *, char *, size_t);
  
 int stregion(int);
 int ccregion(char *);
 char *rgnname(int);
  
-void *memrchr(const void *, int, size_t);
+// void *memrchr(const void *, int, size_t);
  
 MDSP_BOOL sysmonms(char *, char *, ...);
 MDSP_BOOL sysmoncl(char *);
@@ -1214,12 +1207,6 @@ time_t odbtime ( void );
  
 int bltnpcnt ( char *, int );
 void bltnpage ( char *, int, int );
- 
-void rot( char *, unsigned int );
-void unrot( char *, unsigned int );
- 
-void encrypt( char *, char * );
-void decrypt( char *, char * );
  
 int HEXTOI( char *, int );
  

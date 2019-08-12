@@ -19,9 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "metar_structs.h"
  
-#pragma subtitle(" ")
-#pragma page(1)
-#pragma subtitle("subtitle - description                       ")
 /********************************************************************/
 /*                                                                  */
 /*  Title:         fracPart                                         */
@@ -44,36 +41,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /*                 None.                                            */
 /*                                                                  */
 /********************************************************************/
-#pragma page(1)
  
-float fracPart( char *string )
+float fracPart( const char *instring )
 {
- 
-   /***************************/
-   /* DECLARE LOCAL VARIABLES */
-   /***************************/
- 
-   char buf[ 6 ],
+   char buf[ 32 ],
         *slash;
  
    float numerator,
          denominator;
  
-   /*************************/
-   /* START BODY OF ROUTINE */
-   /*************************/
+   slash = strchr(instring, '/');
+
+   if (slash == NULL) {
+    return ((float) atoi(instring));
+   }
  
-   slash = strchr(string, '/');
- 
-   memset(buf , '\0', 6);
-   strncpy( buf, string, slash-string);
+   memset(buf , '\0', sizeof(buf));
+   if (slash - instring >= sizeof(buf)) {
+     /* prevent buffer overflow */
+     return ((float) MAXINT);
+   }
+   strncpy( buf, instring, slash - instring);
  
    numerator = (float) atoi(buf);
  
-   memset(buf , '\0', 6);
-   strcpy( buf, slash+1);
- 
-   denominator = (float) atoi(buf);
+   denominator = (float) atoi(slash + 1);
  
    if( denominator == 0.0 )
       return ((float) MAXINT);
@@ -82,3 +74,4 @@ float fracPart( char *string )
  
 }
  
+// vim: set ts=4 sw=4 sts=4 noet :
