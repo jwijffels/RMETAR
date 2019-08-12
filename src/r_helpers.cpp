@@ -67,6 +67,9 @@ Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
     case DIST_METERS:
       Distance_Unit = "meters";
   };
+  if (Mptr->RRVR[element].runway_designator[0] == '\0') {
+    Distance_Unit = NA_STRING;
+  }
   Rcpp::List output = Rcpp::List::create(
     Rcpp::Named("runway_designator")  = string_or_na(Mptr->RRVR[element].runway_designator),
     Rcpp::Named("vrbl_visRange")      = logical_vector(Mptr->RRVR[element].vrbl_visRange), 
@@ -75,7 +78,8 @@ Rcpp::List r_extract_runway_visrange_(Decoded_METAR *Mptr, int element) {
     Rcpp::Named("visRange")           = integer_vector(Mptr->RRVR[element].visRange), 
     Rcpp::Named("Max_visRange")       = integer_vector(Mptr->RRVR[element].Max_visRange),
     Rcpp::Named("Min_visRange")       = integer_vector(Mptr->RRVR[element].Min_visRange), 
-    Rcpp::Named("Distance_Unit")      = Distance_Unit);
+    Rcpp::Named("Distance_Unit")      = Rcpp::CharacterVector(Distance_Unit)
+  );
   return output;
 }
 
@@ -86,7 +90,8 @@ Rcpp::List r_extract_dispatch_visrange_(Decoded_METAR *Mptr) {
     Rcpp::Named("above_max_DVR")  = logical_vector(Mptr->DVR.above_max_DVR), 
     Rcpp::Named("visRange")       = integer_vector(Mptr->DVR.visRange), 
     Rcpp::Named("Max_visRange")   = integer_vector(Mptr->DVR.Max_visRange),
-    Rcpp::Named("Min_visRange")   = integer_vector(Mptr->DVR.Min_visRange));
+    Rcpp::Named("Min_visRange")   = integer_vector(Mptr->DVR.Min_visRange)
+  );
   return output;
 }
 
@@ -96,7 +101,8 @@ Rcpp::List r_extract_recent_wx_(Decoded_METAR *Mptr, int element) {
     Rcpp::Named("Bhh")            = integer_vector(Mptr->ReWx[element].Bhh), 
     Rcpp::Named("Bmm")            = integer_vector(Mptr->ReWx[element].Bmm), 
     Rcpp::Named("Ehh")            = integer_vector(Mptr->ReWx[element].Ehh), 
-    Rcpp::Named("Emm")            = integer_vector(Mptr->ReWx[element].Emm));
+    Rcpp::Named("Emm")            = integer_vector(Mptr->ReWx[element].Emm)
+  );
   return output;
 }
 
@@ -105,7 +111,8 @@ Rcpp::List r_extract_cloud_conditions_(Decoded_METAR *Mptr, int element) {
     Rcpp::Named("cloud_type")       = string_or_na(Mptr->cloudGroup[element].cloud_type),
     Rcpp::Named("cloud_hgt_char")   = string_or_na(Mptr->cloudGroup[element].cloud_hgt_char), 
     Rcpp::Named("other_cld_phenom") = string_or_na(Mptr->cloudGroup[element].other_cld_phenom), 
-    Rcpp::Named("cloud_hgt_meters") = integer_vector(Mptr->cloudGroup[element].cloud_hgt_meters));
+    Rcpp::Named("cloud_hgt_meters") = integer_vector(Mptr->cloudGroup[element].cloud_hgt_meters)
+  );
   return output;
 }
 
@@ -115,6 +122,7 @@ Rcpp::List r_extract_wind_(Decoded_METAR *Mptr) {
     Rcpp::Named("windVRB")    = logical_vector(Mptr->winData.windVRB), 
     Rcpp::Named("windDir")    = integer_vector(Mptr->winData.windDir), 
     Rcpp::Named("windSpeed")  = integer_vector(Mptr->winData.windSpeed), 
-    Rcpp::Named("windGust")   = integer_vector(Mptr->winData.windGust));
+    Rcpp::Named("windGust")   = integer_vector(Mptr->winData.windGust)
+  );
   return output;
 }
