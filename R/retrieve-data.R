@@ -40,10 +40,13 @@ download_metar <- function(hour) {
 #' 
 #' Fetch a list of airports from <http://ourairports.com/data>. This data is Public Domain.
 #' 
-#' @return a data.frame with columns `id`, `iata`, `continent`, `country`, `country_name`, `region`, `region_name`, `municipality`, `name`, `type`, `latitude` (in degrees), `longitude` (in degrees), `elevation` (in feet), `gps`, `local_code`, `link` and `link_wikipedia`
-
+#' 
+#' @return A data frame. See Details.
+#' @template airport-columns
+#' 
 #' @export
 #' @family data functions
+#' @seealso You can find a snapshot of downloaded airports in the [airports] dataset.
 #' @examples
 #' \dontrun{
 #' x <- download_airports()

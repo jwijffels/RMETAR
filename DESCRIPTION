@@ -32,3 +32,4 @@ Imports:
     fasttime,
     utils
 Roxygen: list(markdown = TRUE)
+LazyData: true
