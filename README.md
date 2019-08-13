@@ -43,16 +43,17 @@ code.
 For example, you can find the METAR for London Heathrow (ICAO EGLL) at
 <https://aviationweather.gov/metar/data?ids=egll>
 
-You can also query the NOAA data service at
-<https://aviationweather.gov/dataserver/example?datatype=metar>, where
-you can access METARS using search strings to retrieve data in XML
+You can also query the [NOAA data
+service](https://aviationweather.gov/dataserver/example?datatype=metar),
+where you can access METARS using search strings to retrieve data in XML
 format
 
 ## METAR specifications
 
-The Federal Meteorological Handbook No.1. (FMH-1 1995), which describes
-the U.S. standards, is available online at
-<http://www.ofcm.gov/fmh-1/fmh1.htm>
+The [Federal Meteorological Handbook No.1.
+(FMH-1 1995)](https://www.ofcm.gov/publications/fmh/FMH1/FMH1_2017.pdf),
+which describes the U.S. standards, is available online at [ofcm
+publications](https://www.ofcm.gov/publications/fmh/allfmh2.htm)
 
 ## Example
 
