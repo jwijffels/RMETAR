@@ -4,6 +4,6 @@ z <- decodemetar(x = metarcode)
 
 expect_true(is.data.frame(z))
 expect_true(inherits(z, "decodedMETAR"))
-expect_equal(ncol(z), 287L)
+expect_equal(ncol(z), 268L)
 expect_equal(nrow(z), 1L)
 expect_equal(z$METAR, metarcode)

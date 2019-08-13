@@ -79,15 +79,15 @@ Rcpp::DataFrame r_decode_metar_(std::string metarcode) {
     .add("CHINO_LOC",       string_or_na(Mptr->CHINO_LOC))
     .add("VISNO_LOC",       string_or_na(Mptr->VISNO_LOC));
   
-  for(int i=0; i<7; i++){
+  for(int i=0; i < MAX_PARTIAL_OBSCURATIONS; i++){
     var = "PartialObscurationAmt_"  + std::to_string(i+1);
     z.add(var,  string_or_na(Mptr->PartialObscurationAmt[i]));
   }
-  for(int i=0; i<12; i++){
+  for(int i=0; i < MAX_PARTIAL_OBSCURATIONS; i++){
     var = "PartialObscurationPhenom_"  + std::to_string(i+1);
     z.add(var,  string_or_na(Mptr->PartialObscurationPhenom[i]));
   }
-  for(int i=0; i<10; i++){
+  for(int i=0; i < MAX_SURFACE_OBSCURATIONS; i++){
     var = "SfcObscuration_"  + std::to_string(i+1);
     z.add(var,  string_or_na(Mptr->SfcObscuration[i]));
   }
