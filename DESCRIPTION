@@ -35,3 +35,4 @@ Imports:
     utils
 Roxygen: list(markdown = TRUE)
 LazyData: true
+Language:en-GB
